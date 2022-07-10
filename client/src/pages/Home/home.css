@@ -1,0 +1,90 @@
+.home {
+  min-height: 100%;
+  font-family: "Righteous", cursive;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.home h1 {
+  margin-top: 10rem;
+  font-size: largest;
+}
+
+.home form {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.home form p {
+  font-size: 2rem;
+  color: goldenrod;
+}
+
+.input-container {
+  display: inline-flex;
+  border: 2px solid goldenrod;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.input-container > * {
+  background-color: rgba(0, 0, 0, 0.15);
+  border: none;
+}
+
+.input-container button {
+  font-size: 1.5rem;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.input-container button span {
+  width: max-content;
+  text-align: center;
+}
+
+.input-container button:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: goldenrod;
+}
+
+.input-container button:active {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.input-container input[type="number"] {
+  font-size: 3rem;
+  text-align: center;
+  width: 1em;
+  pointer-events: none;
+  color: rgb(218, 165, 32);
+  text-shadow: -1px 1px 1px #333;
+  border-right: 1px solid hsla(43, 74%, 37%, 0.5);
+  border-left: 1px solid hsla(43, 74%, 37%, 0.5);
+}
+
+.input-container input[type="number"]::-webkit-inner-spin-button,
+.input-container input[type="number"]::-webkit-outer-spin-button {
+  display: none;
+}
+
+.play-btn {
+  background-color: goldenrod;
+  border: 2px solid #333;
+  border-radius: 15px;
+  color: #3f0e08;
+  padding: 0 1em;
+  font-size: 1.5rem;
+  height: 100%;
+}
+
+.play-btn:hover {
+  filter: brightness(80%);
+  cursor: pointer;
+}

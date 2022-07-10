@@ -1,0 +1,15 @@
+.die-background {
+  border: 10px solid black;
+}
+
+.die.held {
+  fill: rgb(120, 100, 100);
+}
+
+.die.held .pip {
+  filter: brightness(0%);
+}
+
+.die * {
+  pointer-events: none;
+}

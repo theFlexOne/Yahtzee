@@ -1,0 +1,52 @@
+header {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: inline-flex;
+  justify-content: flex-start;
+  padding: 0.15rem 0;
+  max-height: 4rem;
+}
+
+header svg {
+  margin-left: 1rem;
+  height: 100%;
+  /* max-height: 100%; */
+}
+
+header svg:hover {
+  cursor: pointer;
+}
+
+div.modal {
+  position: absolute;
+  place-self: center;
+  margin: 0 auto;
+  z-index: 2;
+  border: 4px solid goldenrod;
+  background-color: #aaa;
+  color: #3f0e08;
+  border-radius: 8px;
+  padding: 1.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  height: 33%;
+}
+
+div.modal .buttons {
+  display: flex;
+  width: 50%;
+  gap: 0.5rem;
+}
+
+div.modal .buttons button {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  font-family: "Righteous", cursive;
+  color: #3f0e08;
+  background-color: goldenrod;
+  border-radius: 8px;
+  cursor: pointer;
+}
