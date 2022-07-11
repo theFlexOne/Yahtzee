@@ -22,7 +22,10 @@ const Home = () => {
 
   return (
     <div className="home">
-      <h1>Welcome, {user.username}! Would you like to start a new game?</h1>
+      <h1>
+        Welcome, {user?.username + "!" || ""} Would you like to start a new
+        game?
+      </h1>
       <form onSubmit={handleNewGameClick}>
         <p>Players:</p>
         <CounterInput
