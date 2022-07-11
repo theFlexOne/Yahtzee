@@ -22,20 +22,27 @@ const Home = () => {
 
   return (
     <div className="home">
-      <h1>
-        Welcome, {user?.username + "!" || ""} Would you like to start a new
-        game?
-      </h1>
-      <form onSubmit={handleNewGameClick}>
-        <p>Players:</p>
-        <CounterInput
-          value={playersQuantity}
-          onChange={handlePlayersQuantityChange}
-        />
-        <button className="play-btn" type="submit">
-          Play!
-        </button>
-      </form>
+      {user ? (
+        <>
+          <h1>
+            Welcome, {user?.username + "!" || ""} Would you like to start a new
+            game?
+          </h1>
+
+          <form onSubmit={handleNewGameClick}>
+            <p>Players:</p>
+            <CounterInput
+              value={playersQuantity}
+              onChange={handlePlayersQuantityChange}
+            />
+            <button className="play-btn" type="submit">
+              Play!
+            </button>
+          </form>
+        </>
+      ) : (
+        <h1>Please signup or login to continue.</h1>
+      )}
     </div>
   );
 };

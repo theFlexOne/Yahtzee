@@ -8,10 +8,17 @@ import DefaultProfileBadge from "../DefaultProfileBadge/DefaultProfileBadge";
 const Header = () => {
   const [isLeavingGame, setIsLeavingGame] = useState(false);
 
-  const { user } = useUser();
+  const { user, actions } = useUser();
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
+
+  const confirmLeave = () => {
+    setIsLeavingGame(false);
+    navigate("/home");
+  };
+
+  const cancelLeave = () => setIsLeavingGame(false);
 
   const handleLogoClick = (e) => {
     e.preventDefault();
@@ -22,14 +29,13 @@ const Header = () => {
     navigate("/home");
   };
 
-  const confirmLeave = () => {
-    setIsLeavingGame(false);
-    navigate("/home");
+  const handleLogoutClick = (e) => {
+    e.preventDefault();
+    fetch("/logout", { method: "DELETE" }).then(() => {
+      actions.setCurrentUser(null);
+      navigate("/");
+    });
   };
-
-  const cancelLeave = () => setIsLeavingGame(false);
-
-  console.log(user);
 
   return (
     <>
@@ -90,6 +96,9 @@ const Header = () => {
           {user ? (
             <>
               <DefaultProfileBadge username={user.username} />
+              <Link to="/" onClick={handleLogoutClick}>
+                Logout
+              </Link>
               {/* <p className="welcome-user">Welcome, {user.username}</p> */}
             </>
           ) : (

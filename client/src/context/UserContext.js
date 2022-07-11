@@ -1,9 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router";
 
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const checkIfLoggedIn = async () => {

@@ -9,6 +9,8 @@ import { calculateScoringOptionPointsFromDiceValues } from "../../helpers/scorin
 import { MAX_NUMBER_OF_ROLLS_PER_TURN } from "../../system/constants/gameConstants";
 import GameControls from "./components/GameControls/GameControls";
 import { useLocation } from "react-router";
+import { useUser } from "../../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const mockUserList = [
   { id: 1, name: "Red" },
@@ -16,6 +18,8 @@ const mockUserList = [
 ];
 
 const Game = () => {
+  const { user } = useUser();
+  const navigate = useNavigate();
   const location = useLocation();
   const [
     players,
@@ -108,6 +112,10 @@ const Game = () => {
     );
     if (true) endCurrentGame();
   }, [players, calculateCurrentPlayersScores]);
+
+  useEffect(() => {
+    if (!user) navigate("/");
+  }, [user]);
 
   return (
     <div className="game">

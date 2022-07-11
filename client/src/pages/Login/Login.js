@@ -19,9 +19,10 @@ const Login = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     };
-    const res = await fetch("/users", options);
-    if (!res.ok) console.error(res.error);
+    const res = await fetch("/login", options);
+    if (!res.ok) return console.error(res);
     const user = await res.json();
+    console.log(user);
     setCurrentUser(user);
     navigate("/");
   };
