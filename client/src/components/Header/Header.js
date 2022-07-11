@@ -1,9 +1,14 @@
 import "./header.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useUser } from "../../context/UserContext";
+import LeaveGameConfirmation from "../LeaveGameConfirmation/LeaveGameConfirmation";
+import DefaultProfileBadge from "../DefaultProfileBadge/DefaultProfileBadge";
 
 const Header = () => {
   const [isLeavingGame, setIsLeavingGame] = useState(false);
+
+  const { user } = useUser();
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -22,20 +27,14 @@ const Header = () => {
     navigate("/home");
   };
 
-  const cancelLeave = () => {
-    setIsLeavingGame(false);
-  };
+  const cancelLeave = () => setIsLeavingGame(false);
+
+  console.log(user);
 
   return (
     <>
       {isLeavingGame && (
-        <div className="modal" open={isLeavingGame}>
-          <h2>Are you sure you want to leave this game?</h2>
-          <div className="buttons">
-            <button onClick={confirmLeave}>Yes</button>
-            <button onClick={cancelLeave}>Cancel</button>
-          </div>
-        </div>
+        <LeaveGameConfirmation confirm={confirmLeave} cancel={cancelLeave} />
       )}
 
       <header>
@@ -87,6 +86,19 @@ const Header = () => {
             </defs>
           </svg>
         </Link>
+        <span>
+          {user ? (
+            <>
+              <DefaultProfileBadge username={user.username} />
+              {/* <p className="welcome-user">Welcome, {user.username}</p> */}
+            </>
+          ) : (
+            <>
+              <Link to="/signup">Signup</Link>
+              <Link to="/login">Login</Link>
+            </>
+          )}
+        </span>
       </header>
     </>
   );

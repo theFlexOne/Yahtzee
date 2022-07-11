@@ -4,6 +4,9 @@ header {
   justify-content: flex-start;
   padding: 0.15rem 0;
   max-height: 4rem;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1.25rem;
+  color: #ddd;
 }
 
 header svg {
@@ -16,37 +19,24 @@ header svg:hover {
   cursor: pointer;
 }
 
-div.modal {
-  position: absolute;
-  place-self: center;
-  margin: 0 auto;
-  z-index: 2;
-  border: 4px solid goldenrod;
-  background-color: #aaa;
-  color: #3f0e08;
-  border-radius: 8px;
-  padding: 1.25rem 2rem;
+header :last-child {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  justify-content: center;
   align-items: center;
-  height: 33%;
-}
-
-div.modal .buttons {
-  display: flex;
-  width: 50%;
   gap: 0.5rem;
+  margin-left: auto;
+  margin-right: 1rem;
 }
 
-div.modal .buttons button {
-  flex: 1;
-  padding: 0.5rem 1rem;
-  font-size: 1.5rem;
-  font-family: "Righteous", cursive;
-  color: #3f0e08;
-  background-color: goldenrod;
-  border-radius: 8px;
+header a {
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+header a:hover {
   cursor: pointer;
+  font-weight: bold;
+}
+
+header :visited {
+  color: #ddd;
 }

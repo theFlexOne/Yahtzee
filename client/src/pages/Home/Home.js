@@ -2,9 +2,12 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./home.css";
 import CounterInput from "../../components/CounterInput/CounterInput";
+import { useUser } from "../../context/UserContext";
 
 const Home = () => {
   const [playersQuantity, setPlayersQuantity] = useState(1);
+
+  const { user } = useUser();
 
   const navigate = useNavigate();
 
@@ -19,20 +22,13 @@ const Home = () => {
 
   return (
     <div className="home">
-      <h1>Welcome! Would you like to start a new game?</h1>
+      <h1>Welcome, {user.username}! Would you like to start a new game?</h1>
       <form onSubmit={handleNewGameClick}>
         <p>Players:</p>
-        <CounterInput />
-        {/* <label htmlFor="playersQuantity">Number of players:</label>
-        <input
-          type="number"
-          name="playersQuantity"
-          id="playersQuantity"
-          min="1"
-          max="4"
+        <CounterInput
           value={playersQuantity}
           onChange={handlePlayersQuantityChange}
-        /> */}
+        />
         <button className="play-btn" type="submit">
           Play!
         </button>

@@ -1,7 +1,7 @@
 import "./counterInput.css";
 import { useState } from "react";
 
-const CounterInput = () => {
+const CounterInput = ({ value, onChange }) => {
   const [counterValue, setCounterValue] = useState(1);
   const decrementCounter = () => {
     if (counterValue === 1) return;
@@ -13,8 +13,8 @@ const CounterInput = () => {
   };
   return (
     <div className="input-container">
-      <button type="button" id="decrement" onClick={decrementCounter}>
-        <span class="material-symbols-outlined">remove</span>
+      <button type="button" id="decrementButton" onClick={decrementCounter}>
+        <span className="material-symbols-outlined">remove</span>
       </button>
       <input
         type="number"
@@ -22,12 +22,13 @@ const CounterInput = () => {
         id="counterInput"
         min="1"
         max="4"
-        value={counterValue}
-        readonly
+        value={value}
+        onChange={onChange}
+        readOnly
         tabIndex="-1"
       />
-      <button type="button" id="increment" onClick={incrementCounter}>
-        <span class="material-symbols-outlined">add</span>
+      <button type="button" id="incrementButton" onClick={incrementCounter}>
+        <span className="material-symbols-outlined">add</span>
       </button>
     </div>
   );
