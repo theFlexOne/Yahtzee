@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useDice } from "../../context/DiceContext";
 import usePlayers from "../../hooks/usePlayers";
-// import Scoresheet from "./components/Scoresheet/Scoresheet";
+import Scoresheet from "./components/Scoresheet/Scoresheet";
 
 import "./game.css";
 import Dice from "./components/Dice/Dice";
@@ -19,8 +19,10 @@ const mockUserList = [
 
 const Game = () => {
   const { user } = useUser();
-  const navigate = useNavigate();
+
   const location = useLocation();
+  const navigate = useNavigate();
+
   const [
     players,
     { updateCurrentPlayersScoresheet, calculateCurrentPlayersScores },
@@ -103,19 +105,19 @@ const Game = () => {
     setTakenScoringOptionId(scoringOptionId);
   };
 
-  useEffect(() => {
-    const endCurrentGame = () => {
-      console.log(calculateCurrentPlayersScores());
-    };
-    const playerScoresheets = players.flatMap((p) =>
-      p.scoresheet.map((opt) => ({ ...opt, playerId: p.id }))
-    );
-    if (true) endCurrentGame();
-  }, [players, calculateCurrentPlayersScores]);
+  // useEffect(() => {
+  //   const endCurrentGame = () => {
+  //     console.log(calculateCurrentPlayersScores());
+  //   };
+  //   const playerScoresheets = players.flatMap((p) =>
+  //     p.scoresheet.map((opt) => ({ ...opt, playerId: p.id }))
+  //   );
+  //   if (true) endCurrentGame();
+  // }, [players, calculateCurrentPlayersScores]);
 
   useEffect(() => {
     if (!user) navigate("/");
-  }, [user]);
+  }, [user, navigate]);
 
   return (
     <div className="game">
@@ -126,13 +128,13 @@ const Game = () => {
         isRollable={isRollable}
         takenScoringOptionId={takenScoringOptionId}
       />
-      {/* <Scoresheet
+      <Scoresheet
         rollCount={rollCount.current}
         player={currentPlayer}
         onScoringOptionClick={handleScoringOptionClick}
         takenScoringOptionId={takenScoringOptionId}
         // possibleScores={possibleScores}
-      /> */}
+      />
     </div>
   );
 };

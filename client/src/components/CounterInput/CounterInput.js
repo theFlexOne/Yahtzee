@@ -1,15 +1,24 @@
 import "./counterInput.css";
 import { useState } from "react";
 
-const CounterInput = ({ value, onChange }) => {
+const CounterInput = ({ playersQuantityRef }) => {
   const [counterValue, setCounterValue] = useState(1);
+
+  const updatePlayersQuantityRef = (quantity) => {
+    playersQuantityRef.current = quantity;
+  };
+
   const decrementCounter = () => {
     if (counterValue === 1) return;
-    setCounterValue(() => counterValue - 1);
+    const newValue = counterValue - 1;
+    updatePlayersQuantityRef(newValue);
+    setCounterValue(newValue);
   };
   const incrementCounter = () => {
     if (counterValue === 4) return;
-    setCounterValue(() => counterValue + 1);
+    const newValue = counterValue + 1;
+    updatePlayersQuantityRef(newValue);
+    setCounterValue(newValue);
   };
   return (
     <div className="input-container">
@@ -22,8 +31,8 @@ const CounterInput = ({ value, onChange }) => {
         id="counterInput"
         min="1"
         max="4"
-        value={value}
-        onChange={onChange}
+        value={counterValue}
+        onChange={(e) => setCounterValue(e.target.value)}
         readOnly
         tabIndex="-1"
       />

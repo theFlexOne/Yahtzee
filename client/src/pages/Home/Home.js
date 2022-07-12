@@ -1,23 +1,25 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import "./home.css";
 import CounterInput from "../../components/CounterInput/CounterInput";
 import { useUser } from "../../context/UserContext";
 
 const Home = () => {
-  const [playersQuantity, setPlayersQuantity] = useState(1);
+  const playersQuantityRef = useRef();
 
   const { user } = useUser();
 
   const navigate = useNavigate();
 
-  const handlePlayersQuantityChange = (e) => {
-    setPlayersQuantity(e.target.value);
-  };
+  // const handlePlayersQuantityChange = (e) => {
+  //   setPlayersQuantity(e.target.value);
+  // };
 
   const handleNewGameClick = (e) => {
     e.preventDefault();
-    navigate("/game", { state: { playersQuantity } });
+    navigate("/game", {
+      state: { playersQuantity: playersQuantityRef.current },
+    });
   };
 
   return (
@@ -31,10 +33,7 @@ const Home = () => {
 
           <form onSubmit={handleNewGameClick}>
             <p>Players:</p>
-            <CounterInput
-              value={playersQuantity}
-              onChange={handlePlayersQuantityChange}
-            />
+            <CounterInput playersQuantityRef={playersQuantityRef} />
             <button className="play-btn" type="submit">
               Play!
             </button>

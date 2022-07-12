@@ -7,6 +7,7 @@ header {
   font-family: "Courier New", Courier, monospace;
   font-size: 1.25rem;
   color: #ddd;
+  padding: 0.1rem 1rem 0;
 }
 
 header svg {
@@ -24,7 +25,6 @@ header :last-child {
   align-items: center;
   gap: 0.5rem;
   margin-left: auto;
-  margin-right: 1rem;
 }
 
 header a {
@@ -37,6 +37,6 @@ header a:hover {
   font-weight: bold;
 }
 
-header :visited {
+header a:visited {
   color: #ddd;
 }

@@ -1,7 +1,6 @@
 import "./scoresheet.css";
 import { DEFAULT_SCORING_OPTIONS } from "../../../../system/constants/defaultScoringOptions";
 import { ReactComponent as RightArrow } from "../../../../assets/right-arrow.svg";
-import yahtzeeLogo from "../../../../assets/Slice 1.svg";
 import ScoresheetSection from "../ScoresheetSection/ScoresheetSection";
 import ScoresheetSectionHeader from "../ScoresheetSectionHeader/ScoresheetSectionHeader";
 import ScoresheetScoringOption from "../ScoresheetScoringOption/ScoresheetScoringOption";
@@ -35,9 +34,7 @@ const Scoresheet = ({
     return total;
   };
 
-  const calculateBonusBox = () => {
-    return addUpUpperSection() >= 63 ? 35 : 0;
-  };
+  const calculateBonusBox = () => (addUpUpperSection() >= 63 ? 35 : 0);
 
   const addUpUpperSectionWithBonus = () => {
     const total = player.scoresheet.reduce((acc, cur) => {
