@@ -27,9 +27,10 @@ header :last-child {
   margin-left: auto;
 }
 
-header a {
+header a:not(.logout) {
   text-decoration: none;
   text-transform: uppercase;
+  animation: glow 1s ease-in-out infinite alternate;
 }
 
 header a:hover {
@@ -39,4 +40,13 @@ header a:hover {
 
 header a:visited {
   color: #ddd;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: none;
+  }
+  to {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff;
+  }
 }

@@ -96,7 +96,7 @@ const Header = () => {
           {user ? (
             <>
               <DefaultProfileBadge username={user.username} />
-              <Link to="/" onClick={handleLogoutClick}>
+              <Link className="logout" to="/" onClick={handleLogoutClick}>
                 Logout
               </Link>
               {/* <p className="welcome-user">Welcome, {user.username}</p> */}
