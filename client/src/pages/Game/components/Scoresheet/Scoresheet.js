@@ -55,7 +55,7 @@ const Scoresheet = ({
   return (
     <div className="scoresheet-container">
       {rollCount === 3 && !takenScoringOptionId && (
-        <div id="takeScoreMessage">
+        <div className="take-score-message">
           <p>←</p>
           <p>Please, take a score to continue.</p>
         </div>
