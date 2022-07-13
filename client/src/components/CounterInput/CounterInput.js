@@ -21,7 +21,7 @@ const CounterInput = ({ playersQuantityRef }) => {
     setCounterValue(newValue);
   };
   return (
-    <div className="input-container">
+    <div className="input-container counter">
       <button type="button" id="decrementButton" onClick={decrementCounter}>
         <span className="material-symbols-outlined">remove</span>
       </button>

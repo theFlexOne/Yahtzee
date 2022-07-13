@@ -40,7 +40,9 @@ const Home = () => {
           </form>
         </>
       ) : (
-        <h1>Please signup or login to continue.</h1>
+        <>
+          <h1>Please signup or login to play!</h1>
+        </>
       )}
     </div>
   );

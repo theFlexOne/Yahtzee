@@ -26,7 +26,7 @@ const Header = () => {
       setIsLeavingGame(true);
       return;
     }
-    navigate("/home");
+    navigate("/");
   };
 
   const handleLogoutClick = (e) => {
@@ -44,7 +44,7 @@ const Header = () => {
       )}
 
       <header>
-        <Link to="/home" onClick={handleLogoClick}>
+        <Link to="/" onClick={handleLogoClick}>
           <svg
             viewBox="0 0 823 283"
             fill="none"

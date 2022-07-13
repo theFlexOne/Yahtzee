@@ -1,3 +1,4 @@
+import YahtzeeButton from "../../../../components/YahtzeeButton/YahtzeeButton";
 import "./gameControls.css";
 
 const GameControls = ({
@@ -8,18 +9,18 @@ const GameControls = ({
 }) => {
   return (
     <div className="game-controls">
-      <button
+      <YahtzeeButton
         disabled={!isRollable || takenScoringOptionId}
         onClick={handleRollButtonClick}
       >
         ROLL!
-      </button>
-      <button
+      </YahtzeeButton>
+      <YahtzeeButton
         disabled={!takenScoringOptionId}
         onClick={handleTakeScoreButtonClick}
       >
         TAKE SCORE
-      </button>
+      </YahtzeeButton>
     </div>
   );
 };

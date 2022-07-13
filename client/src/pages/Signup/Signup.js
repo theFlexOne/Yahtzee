@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import Form from "../../components/Form/Form";
+import YahtzeeButton from "../../components/YahtzeeButton/YahtzeeButton";
 import { useUser } from "../../context/UserContext";
 import "./signup.css";
 
 const Signup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   const navigate = useNavigate();
 
@@ -27,25 +30,43 @@ const Signup = () => {
   };
 
   return (
-    <form onSubmit={signupUser}>
-      <label htmlFor="usernameInput"></label>
-      <input
-        id="usernameInput"
-        type="text"
-        placeholder="username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <label htmlFor="passwordInput"></label>
-      <input
-        id="passwordInput"
-        type="password"
-        placeholder="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button type="submit">Submit</button>
-    </form>
+    <div className="signup">
+      <Form onSubmit={signupUser}>
+        <div className="input-container">
+          <label htmlFor="usernameInput">Username:</label>
+          <input
+            id="usernameInput"
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className="input-container">
+          <label htmlFor="passwordInput">Password:</label>
+          <input
+            id="passwordInput"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className="input-container">
+          <label htmlFor="passwordConfirmationInput">Confirm password:</label>
+          <input
+            id="passwordConfirmationInput"
+            type="password"
+            placeholder="Password Confirmation"
+            value={passwordConfirmation}
+            onChange={(e) => setPasswordConfirmation(e.target.value)}
+          />
+        </div>
+        <YahtzeeButton data-styling="secondary" type="submit">
+          Submit
+        </YahtzeeButton>
+      </Form>
+    </div>
   );
 };
 

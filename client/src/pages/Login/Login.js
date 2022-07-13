@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useUser } from "../../context/UserContext";
 import "./login.css";
+import Form from "../../components/Form/Form";
+import YahtzeeButton from "../../components/YahtzeeButton/YahtzeeButton";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -11,8 +13,7 @@ const Login = () => {
 
   const { setCurrentUser } = useUser().actions;
 
-  const loginUser = async (e) => {
-    e.preventDefault();
+  const loginUser = async () => {
     const data = { username, password };
     const options = {
       method: "POST",
@@ -27,26 +28,45 @@ const Login = () => {
     navigate("/");
   };
 
+  const validateInputValues = () => {
+    return [username, password].every((val) => val.length > 0);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!validateInputValues())
+      return console.warn("Input fields cannot be empty");
+    loginUser();
+  };
+
   return (
-    <form onSubmit={loginUser}>
-      <label htmlFor="usernameInput"></label>
-      <input
-        id="usernameInput"
-        type="text"
-        placeholder="username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <label htmlFor="passwordInput"></label>
-      <input
-        id="passwordInput"
-        type="password"
-        placeholder="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button type="submit">Submit</button>
-    </form>
+    <div className="login">
+      <Form onSubmit={handleSubmit}>
+        <div className="input-container">
+          <label htmlFor="usernameInput">Username:</label>
+          <input
+            id="usernameInput"
+            type="text"
+            placeholder="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className="input-container">
+          <label htmlFor="passwordInput">Password:</label>
+          <input
+            id="passwordInput"
+            type="password"
+            placeholder="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <YahtzeeButton data-styling="secondary" type="submit">
+          Submit
+        </YahtzeeButton>
+      </Form>
+    </div>
   );
 };
 

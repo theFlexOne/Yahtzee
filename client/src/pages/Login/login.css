@@ -1,0 +1,9 @@
+.login {
+  display: grid;
+  place-items: center;
+}
+
+.login .input-container {
+  display: flex;
+  gap: 0.5rem;
+}
