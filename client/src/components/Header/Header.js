@@ -15,7 +15,7 @@ const Header = () => {
 
   const confirmLeave = () => {
     setIsLeavingGame(false);
-    navigate("/home");
+    navigate("/");
   };
 
   const cancelLeave = () => setIsLeavingGame(false);
