@@ -65,6 +65,11 @@ tbody.scoresheet-section {
   justify-content: flex-start;
 }
 
+.scoresheet-row .header-cell span {
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
 .scoresheet-row > * {
   display: flex;
   justify-content: center;
