@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./home.css";
 import CounterInput from "../../components/CounterInput/CounterInput";
 import { useUser } from "../../context/UserContext";
@@ -41,7 +41,10 @@ const Home = () => {
         </>
       ) : (
         <>
-          <h1>Please signup or login to play!</h1>
+          <h1>
+            Please <Link to="/signup">signup</Link> or{" "}
+            <Link to="/login">login</Link> to play!
+          </h1>
         </>
       )}
     </div>

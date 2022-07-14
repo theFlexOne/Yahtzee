@@ -6,40 +6,6 @@
   position: relative;
 }
 
-/* .scoresheet-container > * {
-  border: 2px solid #222;
-} */
-/* .scoresheet-top {
-  width: 100%;
-  display: inline-flex;
-  padding: 0.5rem 0.75rem;
-}
-
-.scoresheet-top .player-name {
-  flex-basis: 100%;
-  display: flex;
-  gap: 0.5rem;
-}
-
-.scoresheet-top .player-name h5 {
-  align-self: flex-end;
-  margin-bottom: 0.5rem;
-}
-
-.scoresheet-top .player-name-slot {
-  flex-basis: 80%;
-  border-bottom: 2px solid black;
-  display: flex;
-  place-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-  font-size: 3rem;
-}
-
-.scoresheet-top .player-name-slot p {
-  font-weight: bold;
-} */
-
 .scoresheet[data-layout="horizontal"] {
   border: 2px solid #222;
   display: flex;

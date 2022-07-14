@@ -39,3 +39,14 @@
   filter: brightness(80%);
   cursor: pointer;
 }
+
+.home a {
+  color: goldenrod;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 0.85em;
+}
+
+.home a:hover {
+  filter: brightness(80%);
+}
