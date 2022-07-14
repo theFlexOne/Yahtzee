@@ -6,8 +6,8 @@
   font-weight: bold;
   font-size: 1.25rem;
   font-family: "Righteous", cursive;
-  cursor: pointer;
   padding: 0.25em 0.5em;
+  cursor: pointer;
 }
 
 .yahtzee-button[data-styling="secondary"] {
@@ -16,11 +16,11 @@
   color: goldenrod;
 }
 
+.yahtzee-button:hover:not(:disabled) {
+  filter: brightness(80%);
+}
+
 .yahtzee-button:disabled {
   filter: brightness(50%);
   cursor: default;
-}
-
-.yahtzee-button:hover {
-  filter: brightness(80%);
 }

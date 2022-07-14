@@ -111,8 +111,8 @@ tbody.scoresheet-section {
 }
 
 .points-scored.selected {
-  background-color: #b52717;
-  color: #eee;
+  background-color: goldenrod;
+  /* color: #eee; */
 }
 
 svg.right-arrow {
