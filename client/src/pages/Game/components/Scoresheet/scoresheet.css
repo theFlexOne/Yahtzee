@@ -2,15 +2,14 @@
   border: 4px solid #333;
   background-color: #e4e4e4;
   max-width: min-content;
-  padding: 0 1rem 1rem;
+  padding: 0.5rem;
   position: relative;
 }
 
 /* .scoresheet-container > * {
   border: 2px solid #222;
 } */
-
-.scoresheet-top {
+/* .scoresheet-top {
   width: 100%;
   display: inline-flex;
   padding: 0.5rem 0.75rem;
@@ -33,11 +32,13 @@
   display: flex;
   place-items: center;
   justify-content: center;
+  margin-bottom: 1rem;
+  font-size: 3rem;
 }
 
 .scoresheet-top .player-name-slot p {
   font-weight: bold;
-}
+} */
 
 .scoresheet[data-layout="horizontal"] {
   border: 2px solid #222;
@@ -51,22 +52,20 @@
   border: 2px solid #222;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
 table.scoresheet {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
-  padding: 0.35rem;
+  gap: 0.25rem;
+  padding: 0.25rem;
   border-collapse: collapse;
 }
 
 tbody.scoresheet-section {
-  width: 400px;
+  width: 33vw;
   font-weight: bold;
-  display: grid;
-  grid-template-rows: 1fr;
   display: flex;
   flex-direction: column;
   margin: 2px;
@@ -182,20 +181,20 @@ svg.right-arrow {
 }
 
 [data-font-size="A"] {
-  font-size: 1.25rem;
+  font-size: 1rem;
 }
 
 [data-font-size="B"] {
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   line-height: 80%;
 }
 
 [data-font-size="C"] {
-  font-size: 0.5rem;
+  font-size: 0.4rem;
 }
 
 [data-font-size="D"] {
-  font-size: 0.35rem;
+  font-size: 0.2rem;
   letter-spacing: -1px;
   line-height: 80%;
 }

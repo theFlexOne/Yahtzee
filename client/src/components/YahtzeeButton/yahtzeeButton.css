@@ -1,12 +1,13 @@
 .yahtzee-button {
   border-radius: 15px;
-  border: 4px solid #5d140c;
+  border: 2px solid #5d140c;
   background-color: goldenrod;
   color: #1f0704;
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-family: "Righteous", cursive;
   cursor: pointer;
+  padding: 0.25em 0.5em;
 }
 
 .yahtzee-button[data-styling="secondary"] {
@@ -18,4 +19,8 @@
 .yahtzee-button:disabled {
   filter: brightness(50%);
   cursor: default;
+}
+
+.yahtzee-button:hover {
+  filter: brightness(80%);
 }

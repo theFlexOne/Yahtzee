@@ -60,7 +60,7 @@ const Scoresheet = ({
           <p>Please, take a score to continue.</p>
         </div>
       )}{" "}
-      <ScoresheetTop player={player} />
+      {/* <ScoresheetTop player={player} /> */}
       <table className="scoresheet" data-layout="horizontal">
         <ScoresheetSection>
           <ScoresheetSectionHeader label="upper" />

@@ -1,5 +1,5 @@
-.die-background {
-  border: 10px solid black;
+.die {
+  height: 90px;
 }
 
 .die.held {
@@ -12,4 +12,7 @@
 
 .die * {
   pointer-events: none;
+}
+.die-background {
+  border: 10px solid black;
 }
