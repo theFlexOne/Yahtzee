@@ -46,6 +46,7 @@ const Header = () => {
       <header>
         <Link to="/" onClick={handleLogoClick}>
           <svg
+            id="yahtzeeHeaderLogo"
             viewBox="0 0 823 283"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -103,8 +104,15 @@ const Header = () => {
             </>
           ) : (
             <>
-              <Link to="/signup">Signup</Link>
-              <Link to="/login">Login</Link>
+              <Link
+                className={pathname === "/" ? "home-page" : ""}
+                to="/signup"
+              >
+                Signup
+              </Link>
+              <Link className={pathname === "/" ? "home-page" : ""} to="/login">
+                Login
+              </Link>
             </>
           )}
         </span>

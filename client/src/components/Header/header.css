@@ -27,9 +27,12 @@ header :last-child {
   margin-left: auto;
 }
 
-header a:not(.logout) {
+header a {
   text-decoration: none;
   text-transform: uppercase;
+}
+
+header a.home-page:not(.logout) {
   animation: glow 0.75s ease-in-out infinite alternate;
 }
 
