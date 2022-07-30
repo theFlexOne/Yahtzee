@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   private
 
   def render_unporocessable_entity(invalid)
-    render json: { error: invalid.record.errors }, status: :unprocessable_entity
+    render json: { error: invalid.record.errors, message: "INVALID" }, status: :unprocessable_entity
   end
 
   def user_params

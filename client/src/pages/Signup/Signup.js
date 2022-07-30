@@ -9,6 +9,7 @@ const Signup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [errors, setErrors] = useState({});
 
   const navigate = useNavigate();
 
@@ -16,6 +17,8 @@ const Signup = () => {
 
   const signupUser = async (e) => {
     e.preventDefault();
+    if (passwordConfirmation !== password)
+      return setErrors({ ...errors, passwordConfirmation: true });
     const data = { username, password };
     const options = {
       method: "POST",
@@ -23,7 +26,7 @@ const Signup = () => {
       body: JSON.stringify(data),
     };
     const res = await fetch("/users", options);
-    if (!res.ok) console.error(res.error);
+    if (!res.ok) return console.error(res.error);
     const user = await res.json();
     setCurrentUser(user);
     navigate("/");
@@ -43,7 +46,10 @@ const Signup = () => {
           />
         </div>
         <div className="input-container">
-          <label htmlFor="passwordInput">Password:</label>
+          <label htmlFor="passwordInput">
+            Password:
+            {errors.passwordConfirmation && <span>Passwords do not match</span>}
+          </label>
           <input
             id="passwordInput"
             type="password"
