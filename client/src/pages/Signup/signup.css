@@ -1,9 +1,3 @@
-.signup {
-  display: grid;
-  place-items: center;
-}
-
-.signup .input-container {
-  display: flex;
-  gap: 0.5rem;
+.signup label::after {
+  content: ":";
 }

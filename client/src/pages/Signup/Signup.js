@@ -1,76 +1,61 @@
-import { useState } from "react";
 import { useNavigate } from "react-router";
-import Form from "../../components/Form/Form";
-import YahtzeeButton from "../../components/YahtzeeButton/YahtzeeButton";
 import { useUser } from "../../context/UserContext";
+import YahtzeeButton from "../../components/YahtzeeButton/YahtzeeButton";
 import "./signup.css";
+import { useFormik } from "formik";
+import { useEffect } from "react";
+import Form from "../../components/Form/Form";
+
+const initialValues = {
+  username: "",
+  password: "",
+  passwordConfirmation: "",
+};
 
 const Signup = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [errors, setErrors] = useState({});
+  const formik = useFormik({ initialValues });
 
+  const { user } = useUser();
   const navigate = useNavigate();
 
-  const { setCurrentUser } = useUser().actions;
+  if (user) return navigate("/");
 
-  const signupUser = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (passwordConfirmation !== password)
-      return setErrors({ ...errors, passwordConfirmation: true });
-    const data = { username, password };
-    const options = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    };
-    const res = await fetch("/users", options);
-    if (!res.ok) return console.error(res.error);
-    const user = await res.json();
-    setCurrentUser(user);
-    navigate("/");
+    console.log(formik.values);
   };
 
   return (
     <div className="signup">
-      <Form onSubmit={signupUser}>
-        <div className="input-container">
-          <label htmlFor="usernameInput">Username:</label>
-          <input
-            id="usernameInput"
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-        <div className="input-container">
-          <label htmlFor="passwordInput">
-            Password:
-            {errors.passwordConfirmation && <span>Passwords do not match</span>}
-          </label>
-          <input
-            id="passwordInput"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <div className="input-container">
-          <label htmlFor="passwordConfirmationInput">Confirm password:</label>
-          <input
-            id="passwordConfirmationInput"
-            type="password"
-            placeholder="Password Confirmation"
-            value={passwordConfirmation}
-            onChange={(e) => setPasswordConfirmation(e.target.value)}
-          />
-        </div>
-        <YahtzeeButton data-styling="secondary" type="submit">
-          Submit
-        </YahtzeeButton>
+      <Form id="signupForm" onSubmit={handleSubmit}>
+        <label htmlFor="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="create a unique username"
+          value={formik.values.username}
+          onChange={formik.handleChange}
+        />
+        <label htmlFor="username">Password</label>
+        <input
+          type="text"
+          id="password"
+          name="password"
+          placeholder="must be at least 7 characters"
+          value={formik.values.password}
+          onChange={formik.handleChange}
+        />
+        <label htmlFor="username">Re-enter Password</label>
+        <input
+          type="text"
+          id="passwordConfirmation"
+          name="passwordConfirmation"
+          placeholder="confirm password"
+          value={formik.values.passwordConfirmation}
+          onChange={formik.handleChange}
+        />
+        <YahtzeeButton data-styling="secondary">Submit</YahtzeeButton>
       </Form>
     </div>
   );
