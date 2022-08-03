@@ -1,3 +1,4 @@
-.signup label::after {
-  content: ":";
+.signup {
+  display: grid;
+  place-items: center;
 }

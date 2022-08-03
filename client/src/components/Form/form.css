@@ -29,10 +29,14 @@
   gap: 0.25rem;
 }
 
+.form-container .input-container label::after {
+  content: ":";
+}
+
 .form-container .input-container input {
   font-size: smallest;
   margin-left: auto;
-  padding: 0.1rem 0.5rem;
+  padding: 0.05rem 0.05rem;
 }
 
 .form-container button {
