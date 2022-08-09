@@ -3,19 +3,20 @@
   border: 2px solid #3f0e08;
   border-radius: 8px;
   display: flex;
-  max-width: fit-content;
+  max-width: max-content;
   padding: 2rem;
 }
 
 .form-container form {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .form-container .input-container {
   display: flex;
-  gap: 0.5rem;
+  flex-direction: column;
+  /* gap: 0.5rem; */
 }
 
 .form-container .input-container :first-child {
@@ -35,8 +36,9 @@
 
 .form-container .input-container input {
   font-size: smallest;
-  margin-left: auto;
+  /* margin-left: auto; */
   padding: 0.05rem 0.05rem;
+  width: 100%;
 }
 
 .form-container button {
@@ -44,7 +46,7 @@
   padding: 0.25rem 0.5rem;
 }
 
-.error-message {
-  font-size: 0.5rem;
+.form-container .input-error {
+  font-size: 6px;
   color: hsl(0, 100%, 30%);
 }

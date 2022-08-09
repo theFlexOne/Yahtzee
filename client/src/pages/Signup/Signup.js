@@ -3,7 +3,7 @@ import { useUser } from "../../context/UserContext";
 import YahtzeeButton from "../../components/YahtzeeButton/YahtzeeButton";
 import "./signup.css";
 import { useFormik } from "formik";
-import { useEffect } from "react";
+import { useRef } from "react";
 import Form from "../../components/Form/Form";
 
 const initialValues = {
@@ -12,11 +12,23 @@ const initialValues = {
   passwordConfirmation: "",
 };
 
+const onSubmit = (values) => {
+  console.log(values);
+};
+
+const validate = (values) => {
+  const errors = {};
+  if (values.username.length < 7)
+    errors.username = "Username must be at least 7 characters";
+  if (values.password.length < 7)
+    errors.password = "Password must be at least 7 characters";
+  if (values.password !== values.passwordConfirmation)
+    errors.passwordConfirmation = "Passwords must match";
+  return errors;
+};
+
 const Signup = () => {
-  const onSubmit = (values) => {
-    console.log(values);
-  };
-  const formik = useFormik({ initialValues, onSubmit });
+  const formik = useFormik({ initialValues, onSubmit, validate });
 
   const { user } = useUser();
   const navigate = useNavigate();
@@ -36,34 +48,49 @@ const Signup = () => {
               placeholder="create a unique username"
               value={formik.values.username}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
           </div>
+          {formik.errors.username && formik.touched.username && (
+            <div className="input-error">{formik.errors.username}</div>
+          )}
         </div>
         <div className="input-container">
           <div className="input-wrapper">
             <label htmlFor="username">Password</label>
             <input
-              type="text"
+              type="password"
               id="password"
               name="password"
               placeholder="must be at least 7 characters"
               value={formik.values.password}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
           </div>
+          {formik.errors.password && formik.touched.password && (
+            <div className="input-error">{formik.errors.password}</div>
+          )}
         </div>
         <div className="input-container">
           <div className="input-wrapper">
             <label htmlFor="username">Re-enter Password</label>
             <input
-              type="text"
+              type="password"
               id="passwordConfirmation"
               name="passwordConfirmation"
               placeholder="confirm password"
               value={formik.values.passwordConfirmation}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
           </div>
+          {formik.errors.passwordConfirmation &&
+            formik.touched.passwordConfirmation && (
+              <div className="input-error">
+                {formik.errors.passwordConfirmation}
+              </div>
+            )}
         </div>
         <YahtzeeButton data-styling="secondary">Submit</YahtzeeButton>
       </Form>
