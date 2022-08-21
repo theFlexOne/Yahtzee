@@ -5,8 +5,8 @@ const reducer = (state, action) => {
   const stateCopy = [...state];
   switch (action.type) {
     case "update": {
-      const { playerId, scoringOptionId, value } = action.payload;
-      const player = stateCopy.find((player) => player.id === playerId);
+      const { playerIndex, scoringOptionId, value } = action.payload;
+      const player = stateCopy.find((player) => player.id === playerIndex);
       const scoringOption = player.scoresheet.find(
         (opt) => opt.id === scoringOptionId
       );
@@ -19,7 +19,7 @@ const reducer = (state, action) => {
   }
 };
 
-const generateScoresheetState = () => {
+const generatePlayerScoresheetState = () => {
   return DEFAULT_SCORING_OPTIONS.map((opt) => ({
     id: opt.id,
     value: undefined,
@@ -31,9 +31,9 @@ const generatePlayers = (players) => {
   if (Array.isArray(players)) {
     const newPlayers = players.map((player, i) => {
       return {
-        id: player.id,
-        name: player.name,
-        scoresheet: generateScoresheetState(),
+        id: i,
+        name: player,
+        scoresheet: generatePlayerScoresheetState(),
       };
     });
     return newPlayers;
@@ -43,7 +43,7 @@ const generatePlayers = (players) => {
     playersState.push({
       id: i,
       name: `Player ${i + 1}`,
-      scoresheet: generateScoresheetState(),
+      scoresheet: generatePlayerScoresheetState(),
     });
   }
   return playersState;
@@ -57,15 +57,15 @@ const usePlayers = (players = 1) => {
 
   const updateCurrentPlayersScoresheet = (
     scoringOptionId,
-    playerId,
+    playerIndex,
     value = undefined
   ) => {
     dispatch({
       type: "update",
       payload: {
         value,
-        playerId: playerId,
-        scoringOptionId: scoringOptionId,
+        playerIndex,
+        scoringOptionId,
       },
     });
   };
@@ -81,10 +81,12 @@ const usePlayers = (players = 1) => {
     return scores;
   };
 
-  return [
-    playersState,
-    { updateCurrentPlayersScoresheet, calculateCurrentPlayersScores },
-  ];
+  console.log("playersState", playersState);
+
+  return {
+    state: playersState,
+    actions: { updateCurrentPlayersScoresheet, calculateCurrentPlayersScores },
+  };
 };
 
 export default usePlayers;

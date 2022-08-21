@@ -31,3 +31,4 @@ end
 #MINE
 gem "bcrypt", "~> 3.1", ">= 3.1.12"
 gem "byebug"
+gem "redis", "~> 4.0"

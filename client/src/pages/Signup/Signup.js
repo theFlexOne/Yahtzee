@@ -1,19 +1,15 @@
 import { useNavigate } from "react-router";
 import { useUser } from "../../context/UserContext";
 import YahtzeeButton from "../../components/YahtzeeButton/YahtzeeButton";
-import "./signup.css";
 import { useFormik } from "formik";
-import { useRef } from "react";
 import Form from "../../components/Form/Form";
+import "./signup.css";
+import { useState } from "react";
 
 const initialValues = {
   username: "",
   password: "",
   passwordConfirmation: "",
-};
-
-const onSubmit = (values) => {
-  console.log(values);
 };
 
 const validate = (values) => {
@@ -28,9 +24,29 @@ const validate = (values) => {
 };
 
 const Signup = () => {
+  const [backendErrors, setBackendErrors] = useState({});
+  const {
+    user,
+    actions: { setCurrentUser },
+  } = useUser();
+
+  const onSubmit = (values) => {
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
+    };
+    const createUser = async () => {
+      const res = await fetch("/users", options);
+      const data = await res.json();
+      if (data.error) return setBackendErrors(data.error);
+      setCurrentUser(data);
+    };
+    createUser();
+  };
+
   const formik = useFormik({ initialValues, onSubmit, validate });
 
-  const { user } = useUser();
   const navigate = useNavigate();
 
   if (user) return navigate("/");
@@ -53,6 +69,9 @@ const Signup = () => {
           </div>
           {formik.errors.username && formik.touched.username && (
             <div className="input-error">{formik.errors.username}</div>
+          )}
+          {backendErrors.username && (
+            <div className="input-error">username {backendErrors.username}</div>
           )}
         </div>
         <div className="input-container">

@@ -84,37 +84,6 @@ tbody.scoresheet-section {
   padding-left: 0.25rem;
 }
 
-.scoring-option-label {
-  flex-basis: 45%;
-}
-
-.how-to-score {
-  flex-basis: 30%;
-  text-align: center;
-}
-
-.how-to-score:not(.header-cell) {
-  line-height: 12px;
-}
-
-.points-scored {
-  /* flex-grow: 1; */
-  flex-basis: 25%;
-}
-
-.points-scored.total {
-  background-color: #ccc;
-}
-
-.scoring-option .points-scored:not(.locked):hover {
-  cursor: pointer;
-}
-
-.points-scored.selected {
-  background-color: goldenrod;
-  /* color: #eee; */
-}
-
 svg.right-arrow {
   max-height: 1.5rem;
   max-width: min-content;

@@ -4,10 +4,35 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
 }
 
-.home h1 {
+.home .banner {
+  flex-basis: 70%;
+  min-width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.home .banner svg {
+  width: 80%;
+  stroke: black;
+  stroke-width: 3px;
+}
+
+.home .selections a {
+  text-decoration: none;
+  font-size: x-large;
+  font-weight: bold;
+  color: goldenrod;
+}
+
+.home .selections a:hover {
+  filter: brightness(90%);
+  /* color: goldenrod; */
+}
+
+/* .home h1 {
   margin-top: auto;
   margin-bottom: auto;
   font-size: largest;
@@ -49,4 +74,4 @@
 
 .home a:hover {
   filter: brightness(80%);
-}
+} */

@@ -4,7 +4,7 @@ import { ReactComponent as RightArrow } from "../../../../assets/right-arrow.svg
 import ScoresheetSection from "../ScoresheetSection/ScoresheetSection";
 import ScoresheetSectionHeader from "../ScoresheetSectionHeader/ScoresheetSectionHeader";
 import ScoresheetScoringOption from "../ScoresheetScoringOption/ScoresheetScoringOption";
-import ScoresheetTop from "../ScoresheetTop/ScoresheetTop";
+// import ScoresheetTop from "../ScoresheetTop/ScoresheetTop";
 
 const createUpperAndLowerSectionScoringOptionsObjects = () => {
   return DEFAULT_SCORING_OPTIONS.reduce(
@@ -17,16 +17,17 @@ const createUpperAndLowerSectionScoringOptionsObjects = () => {
   );
 };
 
+const [upperSectionScoringOptions, lowerSectionScoringOptions] =
+  createUpperAndLowerSectionScoringOptionsObjects();
+
 const Scoresheet = ({
   player,
   rollCount,
   onScoringOptionClick,
   takenScoringOptionId,
 }) => {
-  const [upperSectionScoringOptions, lowerSectionScoringOptions] =
-    createUpperAndLowerSectionScoringOptionsObjects();
-
   const addUpUpperSection = () => {
+    console.log("player.scoresheet", player.scoresheet);
     const total = player.scoresheet.reduce((acc, cur) => {
       if (cur.section === "upper") acc += cur.value || 0;
       return acc;
@@ -66,6 +67,7 @@ const Scoresheet = ({
           <ScoresheetSectionHeader label="upper" />
           {upperSectionScoringOptions.map((opt) => (
             <ScoresheetScoringOption
+              key={opt.id}
               player={player}
               option={opt}
               onScoringOptionClick={onScoringOptionClick}
@@ -132,6 +134,7 @@ const Scoresheet = ({
           <ScoresheetSectionHeader label="lower" />
           {lowerSectionScoringOptions.map((opt) => (
             <ScoresheetScoringOption
+              key={opt.id}
               player={player}
               option={opt}
               onScoringOptionClick={onScoringOptionClick}

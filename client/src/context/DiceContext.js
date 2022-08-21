@@ -1,4 +1,4 @@
-import { useContext, createContext, useState } from "react";
+import { useContext, createContext, useState, useRef, useEffect } from "react";
 import { randomNumberBetween } from "../helpers/mathHelpers";
 
 const DiceContext = createContext();
@@ -14,8 +14,19 @@ const buildNewDiceStates = () => {
 
 const DiceProvider = ({ children }) => {
   const [diceStates, setDiceStates] = useState(buildNewDiceStates());
+  const diceRef = useRef();
+
+  const startRollDiceAnimation = () => {
+    const dieElements = [
+      ...diceRef.current.querySelectorAll(".die:not(.held)"),
+    ];
+    dieElements.forEach((die) => {
+      console.log(die);
+    });
+  };
 
   const rollDice = () => {
+    startRollDiceAnimation();
     const newDiceStates = diceStates.map((dieState) => {
       if (!dieState.isFree) return dieState;
       const newValue = randomNumberBetween(1, 6);
@@ -43,7 +54,7 @@ const DiceProvider = ({ children }) => {
 
   return (
     diceStates && (
-      <DiceContext.Provider value={[states, actions]}>
+      <DiceContext.Provider value={[states, actions, diceRef]}>
         {children}
       </DiceContext.Provider>
     )

@@ -1,6 +1,5 @@
 .game {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 1rem;
   place-items: center;
   padding-top: 1rem;

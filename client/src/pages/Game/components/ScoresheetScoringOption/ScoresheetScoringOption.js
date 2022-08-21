@@ -28,7 +28,6 @@ const ScoresheetScoringOption = ({
         className={pointsScoredClassNames}
         data-font-size="B"
         onClick={() => onScoringOptionClick(option.id)}
-        // onHover={}
       >
         {value}
       </td>

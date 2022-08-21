@@ -1,10 +1,12 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import DIE_CONFIG from "../../../../system/constants/dieSvgConfig.json";
 import "./die.css";
+
 const dieConfig = {
   pipPatterns: DIE_CONFIG.DIE_SVG_PIP_PATTERNS,
   pipPaths: DIE_CONFIG.DIE_SVG_PIP_PATHS,
 };
+
 const drawPip = (pipId) => (
   <path
     key={pipId}
@@ -14,18 +16,19 @@ const drawPip = (pipId) => (
   />
 );
 
-const Die = ({ dieState, toggleDieFreedom, ...other }) => {
-  const currentPipPattern = useMemo(
-    () => dieConfig.pipPatterns[dieState.value],
-    [dieState.value]
-  );
+const Die = ({ dieState, toggleDieFreedom, className, ...other }) => {
+  const currentPipPattern = dieConfig.pipPatterns[dieState.value];
+
+  const handleDieClick = (e) => {
+    toggleDieFreedom(e);
+  };
 
   return (
-    <div id={dieState.id} className={`die-wrapper ${other.className}`}>
+    <div id={dieState.id} className={`die-wrapper ${className}`} {...other}>
       <svg
         id={`die${dieState.id}`}
         className={`die${!dieState.isFree ? " held" : ""}`}
-        onClick={toggleDieFreedom}
+        onClick={handleDieClick}
         width="100"
         height="110"
         viewBox="0 0 100 110"

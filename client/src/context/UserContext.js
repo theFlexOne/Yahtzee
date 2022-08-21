@@ -1,12 +1,14 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { useLocation } from "react-router";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
 
-  const { pathname } = useLocation();
+  const memoizedValue = useMemo(
+    () => ({ user: currentUser, actions: { setCurrentUser } }),
+    [currentUser]
+  );
 
   useEffect(() => {
     const checkIfLoggedIn = async () => {
@@ -19,9 +21,7 @@ const UserProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider
-      value={{ user: currentUser, actions: { setCurrentUser } }}
-    >
+    <UserContext.Provider value={memoizedValue}>
       {children}
     </UserContext.Provider>
   );
