@@ -1,6 +1,6 @@
 import "./gamePlay.css";
 import Dice from "../Dice/Dice";
-import GameControls from "../GameControls/GameControls";
+// import GameControls from "../GameControls/GameControls";
 import Scoresheet from "../Scoresheet/Scoresheet";
 import YahtzeeButton from "../../../../components/YahtzeeButton/YahtzeeButton";
 import { useRef, useState } from "react";
@@ -19,11 +19,7 @@ const GamePlay = ({ players }) => {
 
   const { state: playersState, actions } = usePlayers(players);
 
-  console.log("playersState", playersState);
-
   const currentPlayer = playersState[currentPlayerIndex];
-
-  console.log("currentPlayer", currentPlayer);
 
   const endCurrentPlayersTurn = () => {
     rollCount.current = 0;
@@ -78,6 +74,7 @@ const GamePlay = ({ players }) => {
     );
     setTakenScoringOptionId(scoringOptionId);
   };
+
   return (
     <div className="game-play">
       <Dice />

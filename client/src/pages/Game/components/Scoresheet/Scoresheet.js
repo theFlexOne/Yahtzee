@@ -55,12 +55,16 @@ const Scoresheet = ({
 
   return (
     <div className="scoresheet-container">
-      {rollCount === 3 && !takenScoringOptionId && (
+      {rollCount.current === 3 && !takenScoringOptionId && (
         <div className="take-score-message">
           <p>←</p>
           <p>Please, take a score to continue.</p>
         </div>
-      )}{" "}
+      )}
+      <div className="player-name-section">
+        Name:
+        <span className="player-name">{player.name}</span>
+      </div>
       {/* <ScoresheetTop player={player} /> */}
       <table className="scoresheet" data-layout="horizontal">
         <ScoresheetSection>
