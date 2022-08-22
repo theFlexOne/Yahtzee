@@ -7,7 +7,7 @@ import "./game.css";
 const Game = () => {
   const { user } = useUser();
 
-  const [players, setPlayers] = useState(user ? [user.username] : []);
+  const [players, setPlayers] = useState(user ? [user.username] : [""]);
   const [activeUsers, setActiveUsers] = useState(user ? [user] : []);
   const [isSettingUp, setIsSettingUp] = useState(true);
 
