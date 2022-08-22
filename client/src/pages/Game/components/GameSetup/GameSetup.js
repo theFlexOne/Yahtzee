@@ -149,7 +149,12 @@ const GameSetup = ({
         })}
       </div>
       <div className="btn-group">
-        <YahtzeeButton onClick={handleAddPlayerClick}>Add Player</YahtzeeButton>
+        <YahtzeeButton
+          onClick={handleAddPlayerClick}
+          disabled={players.length === 4}
+        >
+          Add Player
+        </YahtzeeButton>
         <YahtzeeButton onClick={handleGameStart}>PLAY!</YahtzeeButton>
       </div>
     </div>

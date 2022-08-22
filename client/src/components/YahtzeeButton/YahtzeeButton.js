@@ -1,8 +1,8 @@
 import "./yahtzeeButton.css";
 
-const YahtzeeButton = ({ children, ...otherProps }) => {
+const YahtzeeButton = ({ children, className, ...otherProps }) => {
   return (
-    <button className="yahtzee-button" {...otherProps}>
+    <button className={`yahtzee-button ${className}`} {...otherProps}>
       {children}
     </button>
   );

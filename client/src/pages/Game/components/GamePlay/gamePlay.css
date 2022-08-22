@@ -1,0 +1,7 @@
+.game-play {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0.5rem;
+  align-items: center;
+}
