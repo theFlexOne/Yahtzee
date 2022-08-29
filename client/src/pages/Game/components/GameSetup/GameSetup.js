@@ -31,8 +31,8 @@ const UserCard = ({ name, playerNumber }) => {
 };
 
 const GameSetup = ({
-  players,
-  setPlayers,
+  activePlayers,
+  setActivePlayers,
   activeUsers,
   setActiveUsers,
   setIsSettingUp,
@@ -40,15 +40,15 @@ const GameSetup = ({
   const focusRef = useRef(null);
 
   const handleChange = (playerNumber) => (e) => {
-    const playersCopy = [...players];
+    const playersCopy = [...activePlayers];
     playersCopy[playerNumber] = e.target.value;
-    setPlayers(playersCopy);
+    setActivePlayers(playersCopy);
   };
 
   const handlePlayerDelete = (playerNumber) => (e) => {
-    const playersCopy = [...players];
+    const playersCopy = [...activePlayers];
     playersCopy.splice(playerNumber, 1);
-    setPlayers(playersCopy);
+    setActivePlayers(playersCopy);
   };
 
   const handleGameStart = () => {
@@ -93,7 +93,7 @@ const GameSetup = ({
               type="text"
               placeholder="Enter player name"
               onChange={handleChange(playerNumber)}
-              value={players[playerNumber]}
+              value={activePlayers[playerNumber]}
               onFocus={(e) => (focusRef.current = playerNumber)}
               onBlur={() => (focusRef.current = null)}
               autoFocus={playerNumber === +focusRef.current}
@@ -136,13 +136,13 @@ const GameSetup = ({
   };
 
   const handleAddPlayerClick = () => {
-    setPlayers([...players, ""]);
+    setActivePlayers([...activePlayers, ""]);
   };
 
   return (
     <div className="game-setup">
       <div className="players-container">
-        {players.map((p, i) => {
+        {activePlayers.map((p, i) => {
           if (activeUsers.find((u) => u.username === p))
             return <UserCard key={i} name={p} playerNumber={i} />;
           return <PlayerCard key={i} playerNumber={i} />;
@@ -151,7 +151,7 @@ const GameSetup = ({
       <div className="btn-group">
         <YahtzeeButton
           onClick={handleAddPlayerClick}
-          disabled={players.length === 4}
+          disabled={activePlayers.length === 4}
         >
           Add Player
         </YahtzeeButton>

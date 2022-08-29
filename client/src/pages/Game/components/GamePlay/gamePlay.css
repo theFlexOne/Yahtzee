@@ -5,3 +5,19 @@
   padding: 0.5rem;
   align-items: center;
 }
+
+.full-scoresheet {
+  min-width: 33vw;
+  min-height: 33vh;
+  z-index: 9999999;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--background-gradient);
+}
+
+.complete-game .cards {
+  display: flex;
+  gap: 1rem;
+}

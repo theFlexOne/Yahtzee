@@ -27,7 +27,7 @@ const ScoresheetScoringOption = ({
       <td
         className={pointsScoredClassNames}
         data-font-size="B"
-        onClick={() => onScoringOptionClick(option.id)}
+        onClick={(e) => onScoringOptionClick(option.id, e)}
       >
         {value}
       </td>

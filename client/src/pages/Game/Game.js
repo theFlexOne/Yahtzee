@@ -7,22 +7,24 @@ import "./game.css";
 const Game = () => {
   const { user } = useUser();
 
-  const [players, setPlayers] = useState(user ? [user.username] : [""]);
-  const [activeUsers, setActiveUsers] = useState(user ? [user] : []);
+  const [activePlayers, setActivePlayers] = useState(
+    user ? [user.username] : [""]
+  );
+  const [activeUsers, setActiveUsers] = useState(user ? [user] : []); // room for future multiple logged in users for multiplayer. Unique backend endpoint is needed.
   const [isSettingUp, setIsSettingUp] = useState(true);
 
   return (
     <div className="game">
       {isSettingUp ? (
         <GameSetup
-          players={players}
-          setPlayers={setPlayers}
+          activePlayers={activePlayers}
+          setActivePlayers={setActivePlayers}
           activeUsers={activeUsers}
           setActiveUsers={setActiveUsers}
           setIsSettingUp={setIsSettingUp}
         />
       ) : (
-        <GamePlay players={players} />
+        <GamePlay activePlayers={activePlayers} />
       )}
     </div>
   );

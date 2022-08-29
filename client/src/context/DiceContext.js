@@ -21,7 +21,7 @@ const DiceProvider = ({ children }) => {
       ...diceRef.current.querySelectorAll(".die:not(.held)"),
     ];
     dieElements.forEach((die) => {
-      console.log(die);
+      // console.log(die);
     });
   };
 

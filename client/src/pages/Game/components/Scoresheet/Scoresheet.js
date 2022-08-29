@@ -26,32 +26,31 @@ const Scoresheet = ({
   onScoringOptionClick,
   takenScoringOptionId,
 }) => {
-  const addUpUpperSection = () => {
-    console.log("player.scoresheet", player.scoresheet);
-    const total = player.scoresheet.reduce((acc, cur) => {
-      if (cur.section === "upper") acc += cur.value || 0;
-      return acc;
-    }, 0);
-    return total;
-  };
+  // const addUpUpperSection = () => {
+  //   const total = player.scoresheet.reduce((acc, cur) => {
+  //     if (cur.section === "upper") acc += cur.value || 0;
+  //     return acc;
+  //   }, 0);
+  //   return total;
+  // };
 
-  const calculateBonusBox = () => (addUpUpperSection() >= 63 ? 35 : 0);
+  // const calculateBonusBox = () => (addUpUpperSection() >= 63 ? 35 : 0);
 
-  const addUpUpperSectionWithBonus = () => {
-    const total = player.scoresheet.reduce((acc, cur) => {
-      if (cur.section === "upper") acc += cur.value || 0;
-      return acc;
-    }, 0);
-    return total >= 63 ? total + 35 : total;
-  };
+  // const addUpUpperSectionWithBonus = () => {
+  //   const total = player.scoresheet.reduce((acc, cur) => {
+  //     if (cur.section === "upper") acc += cur.value || 0;
+  //     return acc;
+  //   }, 0);
+  //   return total >= 63 ? total + 35 : total;
+  // };
 
-  const addUpLowerSection = () => {
-    const total = player.scoresheet.reduce((acc, cur) => {
-      if (cur.section === "lower") acc += cur.value || 0;
-      return acc;
-    }, 0);
-    return total;
-  };
+  // const addUpLowerSection = () => {
+  //   const total = player.scoresheet.reduce((acc, cur) => {
+  //     if (cur.section === "lower") acc += cur.value || 0;
+  //     return acc;
+  //   }, 0);
+  //   return total;
+  // };
 
   return (
     <div className="scoresheet-container">
@@ -91,7 +90,7 @@ const Scoresheet = ({
               className="points-scored scoresheet-cell total"
               data-font-size="B"
             >
-              {addUpUpperSection()}
+              {player.upperTotalBeforeBonus}
             </td>
           </tr>
           <tr className="scoresheet-row bonus">
@@ -113,7 +112,7 @@ const Scoresheet = ({
               className="points-scored scoresheet-cell total"
               data-font-size="B"
             >
-              {calculateBonusBox()}
+              {player.upperTotalBeforeBonus < 63 ? 0 : 35}
             </td>
           </tr>
           <tr className="scoresheet-row total">
@@ -130,7 +129,7 @@ const Scoresheet = ({
               className="points-scored scoresheet-cell total"
               data-font-size="B"
             >
-              {addUpUpperSectionWithBonus()}
+              {player.upperTotal}
             </td>
           </tr>
         </ScoresheetSection>
@@ -159,7 +158,7 @@ const Scoresheet = ({
               className="points-scored scoresheet-cell total"
               data-font-size="B"
             >
-              {addUpLowerSection()}
+              {player.lowerTotal}
             </td>
           </tr>
 
@@ -177,7 +176,7 @@ const Scoresheet = ({
               className="points-scored scoresheet-cell total"
               data-font-size="B"
             >
-              {addUpUpperSectionWithBonus()}
+              {player.upperTotal}
             </td>
           </tr>
           <tr className="scoresheet-row grand-total">
@@ -193,7 +192,7 @@ const Scoresheet = ({
               className="points-scored scoresheet-cell total"
               data-font-size="B"
             >
-              {addUpLowerSection() + addUpUpperSectionWithBonus()}
+              {player.grandTotal}
             </td>
           </tr>
         </ScoresheetSection>

@@ -13,6 +13,15 @@ const reducer = (state, action) => {
       scoringOption.value = value;
       return stateCopy;
     }
+    case "lock": {
+      const { playerIndex, scoringOptionId } = action.payload;
+      const player = stateCopy.find((player) => player.id === playerIndex);
+      const scoringOption = player.scoresheet.find(
+        (opt) => opt.id === scoringOptionId
+      );
+      scoringOption.isLocked = true;
+      return stateCopy;
+    }
     default: {
       throw new Error("Invalid action type: " + action.type);
     }
@@ -24,6 +33,7 @@ const generatePlayerScoresheetState = () => {
     id: opt.id,
     value: undefined,
     section: opt.section,
+    isLocked: false,
   }));
 };
 
@@ -34,19 +44,41 @@ const generatePlayers = (players) => {
         id: i,
         name: player,
         scoresheet: generatePlayerScoresheetState(),
+        get upperTotalBeforeBonus() {
+          return this.scoresheet.reduce(
+            (acc, { section, value }) =>
+              section === "upper" && value !== undefined ? acc + value : acc,
+            0
+          );
+        },
+        get upperTotal() {
+          return this.upperTotalBeforeBonus < 63
+            ? this.upperTotalBeforeBonus
+            : this.upperTotalBeforeBonus + 35;
+        },
+        get lowerTotal() {
+          return this.scoresheet.reduce(
+            (acc, { section, value }) =>
+              section === "lower" && value !== undefined ? acc + value : acc,
+            0
+          );
+        },
+        get grandTotal() {
+          return this.upperTotal + this.lowerTotal;
+        },
       };
     });
     return newPlayers;
   }
-  const playersState = [];
-  for (let i = 0; i < players; i++) {
-    playersState.push({
-      id: i,
-      name: `Player ${i + 1}`,
-      scoresheet: generatePlayerScoresheetState(),
-    });
-  }
-  return playersState;
+  // const playersState = [];
+  // for (let i = 0; i < players; i++) {
+  //   playersState.push({
+  //     id: i,
+  //     name: `Player ${i + 1}`,
+  //     scoresheet: generatePlayerScoresheetState(),
+  //   });
+  // }
+  // return playersState;
 };
 
 const usePlayers = (players = 1) => {
@@ -70,6 +102,10 @@ const usePlayers = (players = 1) => {
     });
   };
 
+  const lockPlayerScoringOption = (scoringOptionId, playerIndex) => {
+    dispatch({ type: "lock", payload: { playerIndex, scoringOptionId } });
+  };
+
   const calculateCurrentPlayersScores = () => {
     const scores = playersState.map((player) => {
       const score = player.scoresheet.reduce(
@@ -81,11 +117,23 @@ const usePlayers = (players = 1) => {
     return scores;
   };
 
-  console.log("playersState", playersState);
+  const getWinningPlayer = () => {
+    const winningPlayerId = playersState.reduce((acc, cur) => {
+      if (acc?.highScore === undefined || acc?.highScore < cur.grandTotal)
+        return { highScore: cur.grandTotal, playerId: cur.id };
+      return acc;
+    }, {}).playerId;
+    return playersState.find((p) => p.id === winningPlayerId);
+  };
 
   return {
     state: playersState,
-    actions: { updateCurrentPlayersScoresheet, calculateCurrentPlayersScores },
+    actions: {
+      updateCurrentPlayersScoresheet,
+      calculateCurrentPlayersScores,
+      lockPlayerScoringOption,
+      getWinningPlayer,
+    },
   };
 };
 

@@ -8,47 +8,57 @@ import usePlayers from "../../../../hooks/usePlayers";
 import { useDice } from "../../../../context/DiceContext";
 import { MAX_NUMBER_OF_ROLLS_PER_TURN } from "../../../../system/constants/gameConstants";
 import { calculateScoringOptionPointsFromDiceValues } from "../../../../helpers/scoringHelpers";
+import { useNavigate } from "react-router";
 
-const GamePlay = ({ players }) => {
+const GamePlay = ({ activePlayers }) => {
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
   const [takenScoringOptionId, setTakenScoringOptionId] = useState(null);
+  const [isFullScoresheet, setIsFullScoresheet] = useState(false);
 
   const [dice, { rollDice, resetDice }] = useDice();
   const rollCount = useRef(0);
   const isRollable = rollCount.current < MAX_NUMBER_OF_ROLLS_PER_TURN;
 
-  const { state: playersState, actions } = usePlayers(players);
+  const { state: playersState, actions } = usePlayers(activePlayers);
+
+  const navigate = useNavigate();
 
   const currentPlayer = playersState[currentPlayerIndex];
+
+  const isCompleteGame = playersState.every((p) =>
+    p.scoresheet.every((opt) => opt.isLocked)
+  );
 
   const endCurrentPlayersTurn = () => {
     rollCount.current = 0;
     const nextPlayerIndex =
-      currentPlayerIndex < players.length - 1 ? currentPlayerIndex + 1 : 0;
+      currentPlayerIndex < activePlayers.length - 1
+        ? currentPlayerIndex + 1
+        : 0;
     setCurrentPlayerIndex(nextPlayerIndex);
     setTakenScoringOptionId(null);
+    setIsFullScoresheet(false);
     resetDice();
   };
 
   const handleRollButtonClick = () => {
     if (!isRollable) return;
-    rollCount.current = rollCount.current + 1;
+    rollCount.current++;
     setTakenScoringOptionId(null);
     rollDice();
   };
 
   const handleTakeScoreButtonClick = () => {
+    actions.lockPlayerScoringOption(takenScoringOptionId, currentPlayerIndex);
     endCurrentPlayersTurn();
   };
 
-  const handleScoringOptionClick = (scoringOptionId) => {
-    if (rollCount.current === 0) return;
+  const handleScoringOptionClick = (scoringOptionId, e) => {
     const scoringOption = currentPlayer.scoresheet.find(
       (opt) => opt.id === scoringOptionId
     );
-    const isLockedCell =
-      scoringOption.value >= 0 && takenScoringOptionId !== scoringOptionId;
-    if (isLockedCell) return;
+    if (e.ctrlKey) return console.log("scoringOption", scoringOption); // development usage for current snapshot of scoring option
+    if (rollCount.current === 0 || scoringOption.isLocked) return;
     if (takenScoringOptionId === scoringOptionId) {
       setTakenScoringOptionId(null);
       actions.updateCurrentPlayersScoresheet(
@@ -75,7 +85,41 @@ const GamePlay = ({ players }) => {
     setTakenScoringOptionId(scoringOptionId);
   };
 
-  return (
+  // const getWinningPlayerName = () => {
+  //   const winningPlayerIndex = playersState.reduce((acc, cur) => {
+  //     if
+  //   }, {highScore: 0, playerIndex: undefined})
+  // }
+
+  return isCompleteGame ? (
+    <div className="complete-game">
+      <div className="cards">
+        {playersState.map((p, i) => {
+          return (
+            <div className="card">
+              <p>Player: {p.name}</p>
+              <p>Upper Total: {p.upperTotal}</p>
+              <p>Lower Total: {p.lowerTotal}</p>
+              <p>Grand Total: {p.grandTotal}</p>
+            </div>
+          );
+        })}
+      </div>
+      {playersState.length > 1 && (
+        <div className="winner">
+          <p>Congratulations, {actions.getWinningPlayer().name}!</p>
+          <p>
+            You've won with a grand total of{" "}
+            {actions.getWinningPlayer().grandTotal}
+          </p>
+        </div>
+      )}
+      <div className="play-again-prompt">
+        <p>Thanks for playing!</p>
+        <YahtzeeButton onClick={() => navigate("/")}>Continue</YahtzeeButton>
+      </div>
+    </div>
+  ) : (
     <div className="game-play">
       <Dice />
       <div className="game-controls">

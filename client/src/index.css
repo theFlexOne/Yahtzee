@@ -1,3 +1,12 @@
+:root {
+  --primary-color: #b52717;
+  --primary-color-dark: #3f0e08;
+  --background-gradient: radial-gradient(
+    var(--primary-color),
+    var(--primary-color-dark)
+  );
+}
+
 *,
 *::before,
 *::after {
