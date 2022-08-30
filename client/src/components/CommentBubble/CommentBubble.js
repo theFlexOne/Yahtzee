@@ -3,12 +3,20 @@ import "./commentBubble.css";
 import YahtzeeButton from "../YahtzeeButton/YahtzeeButton";
 import { useUser } from "../../context/UserContext";
 
+const initialState = {
+  name: "",
+  subject: "",
+  comment: "",
+};
+
 const CommentBubble = () => {
   const user = useUser();
 
-  const [name, setName] = useState("");
-  const [subject, setSubject] = useState("");
-  const [comment, setComment] = useState("");
+  const [formData, setFormData] = useState({ ...initialState });
+
+  // const [name, setName] = useState("");
+  // const [subject, setSubject] = useState("");
+  // const [comment, setComment] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
   const handleCommentBubbleClick = () => {
@@ -22,13 +30,13 @@ const CommentBubble = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const data = { name, subject, comment };
     fetch("/comments", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify(formData),
     }).then((res) => {
       if (!res.ok) return console.error("ERROR");
+      setFormData(initialState);
       setIsOpen(false);
     });
   };
@@ -43,8 +51,10 @@ const CommentBubble = () => {
               <input
                 type="text"
                 id="nameInput"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
               />
             </label>
             <label htmlFor="subjectInput">
@@ -52,8 +62,10 @@ const CommentBubble = () => {
               <input
                 type="text"
                 id="subjectInput"
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
+                value={formData.subject}
+                onChange={(e) =>
+                  setFormData({ ...formData, subject: e.target.value })
+                }
               />
             </label>
             <label htmlFor="commentTextArea">
@@ -62,8 +74,10 @@ const CommentBubble = () => {
                 id="commentTextArea"
                 cols="30"
                 rows="5"
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
+                value={formData.comment}
+                onChange={(e) =>
+                  setFormData({ ...formData, comment: e.target.value })
+                }
                 required
               />
             </label>
