@@ -41,7 +41,7 @@ const useGameRecord = () => {
     return;
   };
 
-  return;
+  return { newGameRecord };
 };
 
 export default useGameRecord;

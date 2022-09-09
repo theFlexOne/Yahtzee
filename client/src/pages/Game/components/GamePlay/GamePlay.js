@@ -24,7 +24,7 @@ const GamePlay = ({ activePlayers }) => {
 
   const navigate = useNavigate();
 
-  const { newGameRecord } = useGameRecord();
+  // const { newGameRecord } = useGameRecord();
 
   const currentPlayer = playersState[currentPlayerIndex];
 
@@ -98,9 +98,9 @@ const GamePlay = ({ activePlayers }) => {
   //   }, {highScore: 0, playerIndex: undefined})
   // }
 
-  useEffect(() => {
-    newGameRecord();
-  }, []);
+  // useEffect(() => {
+  //   newGameRecord();
+  // }, [newGameRecord]);
 
   return isCompleteGame ? (
     <div className="complete-game">
