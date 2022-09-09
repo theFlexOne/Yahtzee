@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :game_records, only: [:create]
   resources :comments, only: [:create, :show]
   resources :games
   resources :users, only: [:create, :show]

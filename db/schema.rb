@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_30_032210) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_07_211007) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,24 +22,54 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_30_032210) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "content_column_for_messages", force: :cascade do |t|
+  create_table "dice", force: :cascade do |t|
+    t.integer "position"
+    t.integer "value"
+    t.boolean "isFree"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "roll_id"
+  end
+
+  create_table "game_records", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "start_time"
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "games", force: :cascade do |t|
+  create_table "roll_dice", force: :cascade do |t|
+    t.integer "roll_id"
+    t.integer "die_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "messages", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "game_id", null: false
+  create_table "rolls", force: :cascade do |t|
+    t.integer "turn_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "content"
-    t.index ["game_id"], name: "index_messages_on_game_id"
-    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "scoring_options", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "turns", force: :cascade do |t|
+    t.integer "game_record_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "scoring_option_id"
+    t.integer "player_id"
+    t.integer "scoring_value"
+    t.integer "turn_count"
   end
 
   create_table "users", force: :cascade do |t|
@@ -49,6 +79,4 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_30_032210) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "messages", "games"
-  add_foreign_key "messages", "users"
 end
