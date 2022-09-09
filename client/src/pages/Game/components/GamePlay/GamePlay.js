@@ -3,25 +3,28 @@ import Dice from "../Dice/Dice";
 // import GameControls from "../GameControls/GameControls";
 import Scoresheet from "../Scoresheet/Scoresheet";
 import YahtzeeButton from "../../../../components/YahtzeeButton/YahtzeeButton";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import usePlayers from "../../../../hooks/usePlayers";
 import { useDice } from "../../../../context/DiceContext";
 import { MAX_NUMBER_OF_ROLLS_PER_TURN } from "../../../../system/constants/gameConstants";
 import { calculateScoringOptionPointsFromDiceValues } from "../../../../helpers/scoringHelpers";
 import { useNavigate } from "react-router";
+import useGameRecord from "../../../../hooks/useGameRecord";
 
 const GamePlay = ({ activePlayers }) => {
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
   const [takenScoringOptionId, setTakenScoringOptionId] = useState(null);
-  const [isFullScoresheet, setIsFullScoresheet] = useState(false);
 
   const [dice, { rollDice, resetDice }] = useDice();
+  const turnCount = useRef(1);
   const rollCount = useRef(0);
   const isRollable = rollCount.current < MAX_NUMBER_OF_ROLLS_PER_TURN;
 
   const { state: playersState, actions } = usePlayers(activePlayers);
 
   const navigate = useNavigate();
+
+  const { newGameRecord } = useGameRecord();
 
   const currentPlayer = playersState[currentPlayerIndex];
 
@@ -31,14 +34,18 @@ const GamePlay = ({ activePlayers }) => {
 
   const endCurrentPlayersTurn = () => {
     rollCount.current = 0;
+    turnCount.current++;
     const nextPlayerIndex =
       currentPlayerIndex < activePlayers.length - 1
         ? currentPlayerIndex + 1
         : 0;
     setCurrentPlayerIndex(nextPlayerIndex);
     setTakenScoringOptionId(null);
-    setIsFullScoresheet(false);
     resetDice();
+  };
+
+  const endGame = () => {
+    navigate("/");
   };
 
   const handleRollButtonClick = () => {
@@ -91,12 +98,16 @@ const GamePlay = ({ activePlayers }) => {
   //   }, {highScore: 0, playerIndex: undefined})
   // }
 
+  useEffect(() => {
+    newGameRecord();
+  }, []);
+
   return isCompleteGame ? (
     <div className="complete-game">
       <div className="cards">
         {playersState.map((p, i) => {
           return (
-            <div className="card">
+            <div key={i} className="card">
               <p>Player: {p.name}</p>
               <p>Upper Total: {p.upperTotal}</p>
               <p>Lower Total: {p.lowerTotal}</p>
@@ -116,7 +127,7 @@ const GamePlay = ({ activePlayers }) => {
       )}
       <div className="play-again-prompt">
         <p>Thanks for playing!</p>
-        <YahtzeeButton onClick={() => navigate("/")}>Continue</YahtzeeButton>
+        <YahtzeeButton onClick={endGame}>Continue</YahtzeeButton>
       </div>
     </div>
   ) : (

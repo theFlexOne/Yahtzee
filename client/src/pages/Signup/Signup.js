@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import Form from "../../components/Form/Form";
 import "./signup.css";
 import { useState } from "react";
+import TextField from "../../components/TextField/TextField";
 
 const initialValues = {
   username: "",
@@ -14,10 +15,10 @@ const initialValues = {
 
 const validate = (values) => {
   const errors = {};
-  if (values.username.length < 7)
-    errors.username = "Username must be at least 7 characters";
-  if (values.password.length < 7)
-    errors.password = "Password must be at least 7 characters";
+  if (values.username.length < 5)
+    errors.username = "Username must be at least 5 characters";
+  if (values.password.length !== 4)
+    errors.password = "Password is a 4 digit pin, 0-9.";
   if (values.password !== values.passwordConfirmation)
     errors.passwordConfirmation = "Passwords must match";
   return errors;
@@ -54,7 +55,33 @@ const Signup = () => {
   return (
     <div className="signup">
       <Form id="signupForm" onSubmit={formik.handleSubmit}>
-        <div className="input-container">
+        <TextField
+          name="username"
+          label="Username:"
+          placeholder="username"
+          value={formik.values.username}
+          onChange={formik.handleChange}
+        />
+        <TextField
+          name="password"
+          label="Password:"
+          placeholder="password"
+          type="password"
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+        />
+        <TextField
+          name="passwordConfirmation"
+          label="Confirm password (PIN):"
+          placeholder="confirm password (PIN)"
+          type="password"
+          value={formik.values.passwordConfirmation}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+        />
+        <YahtzeeButton data-styling="secondary">Submit</YahtzeeButton>
+        {/* <div className="input-container">
           <div className="input-wrapper">
             <label htmlFor="username">Username</label>
             <input
@@ -81,7 +108,7 @@ const Signup = () => {
               type="password"
               id="password"
               name="password"
-              placeholder="must be at least 7 characters"
+              placeholder="4 digit pin"
               value={formik.values.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -110,8 +137,7 @@ const Signup = () => {
                 {formik.errors.passwordConfirmation}
               </div>
             )}
-        </div>
-        <YahtzeeButton data-styling="secondary">Submit</YahtzeeButton>
+        </div> */}
       </Form>
     </div>
   );

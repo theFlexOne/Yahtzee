@@ -5,6 +5,9 @@
     var(--primary-color),
     var(--primary-color-dark)
   );
+
+  --font-primary: "Oswald", sans-serif;
+  --font-secondary: "Righteous", cursive;
 }
 
 *,
@@ -16,6 +19,5 @@
 }
 
 html {
-  font-family: "Oswald", sans-serif;
-  /* font-family: "Righteous", cursive; */
+  font-family: var(--font-secondary);
 }

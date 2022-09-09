@@ -16,22 +16,12 @@
 .form-container .input-container {
   display: flex;
   flex-direction: column;
-  /* gap: 0.5rem; */
 }
 
-.form-container .input-container :first-child {
-  font: 2rem;
-}
-
-.form-container .input-wrapper {
+.form-container .input-container label {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 0.25rem;
-}
-
-.form-container .input-container label::after {
-  content: ":";
+  gap: 0.5rem;
 }
 
 .form-container .input-container input {

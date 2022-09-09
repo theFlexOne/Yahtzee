@@ -25,17 +25,13 @@ dialog {
   bottom: 0%;
   left: 100%;
   translate: -110% -7rem;
-  padding: 1rem;
-  background: var(--background-gradient);
-  border: 2px solid goldenrod;
-  border-radius: 3px;
 }
 
-.comment-form {
+.comment-form-container form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  color: goldenrod;
+  color: var(primary-color);
 }
 
 .comment-form label {

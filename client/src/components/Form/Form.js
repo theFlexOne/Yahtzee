@@ -1,8 +1,8 @@
 import "./form.css";
 
-const Form = ({ children, ...otherProps }) => {
+const Form = ({ children, className, ...otherProps }) => {
   return (
-    <div className="form-container">
+    <div className={className + " form-container"}>
       <form {...otherProps}>{children}</form>
     </div>
   );

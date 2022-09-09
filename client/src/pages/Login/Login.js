@@ -1,20 +1,26 @@
-import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useUser } from "../../context/UserContext";
 import "./login.css";
 import Form from "../../components/Form/Form";
 import YahtzeeButton from "../../components/YahtzeeButton/YahtzeeButton";
+import { useFormik } from "formik";
+import TextField from "../../components/TextField/TextField";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
   const navigate = useNavigate();
 
   const { setCurrentUser } = useUser().actions;
 
-  const loginUser = async () => {
-    const data = { username, password };
+  // const validateInputValues = () => {
+  //   return [username, password].every((val) => val.length > 0);
+  // };
+
+  const validate = () => {};
+
+  const onSubmit = async (values) => {
+    // if (!validateInputValues())
+    //   return console.warn("Input fields cannot be empty");
+    const data = { username: values.username, password: values.password };
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -28,40 +34,29 @@ const Login = () => {
     navigate("/");
   };
 
-  const validateInputValues = () => {
-    return [username, password].every((val) => val.length > 0);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!validateInputValues())
-      return console.warn("Input fields cannot be empty");
-    loginUser();
-  };
+  const formik = useFormik({
+    initialValues: { username: "", password: "" },
+    onSubmit,
+  });
 
   return (
     <div className="login">
-      <Form onSubmit={handleSubmit}>
-        <div className="input-container">
-          <label htmlFor="usernameInput">Username:</label>
-          <input
-            id="usernameInput"
-            type="text"
-            placeholder="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-        <div className="input-container">
-          <label htmlFor="passwordInput">Password:</label>
-          <input
-            id="passwordInput"
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+      <Form onSubmit={formik.handleSubmit}>
+        <TextField
+          name="username"
+          label="Username:"
+          placeholder="username"
+          value={formik.values.username}
+          onChange={formik.handleChange}
+        />
+        <TextField
+          name="password"
+          label="Password (PIN):"
+          placeholder="password (PIN)"
+          type="password"
+          value={formik.values.password}
+          onChange={formik.handleChange}
+        />
         <YahtzeeButton data-styling="secondary" type="submit">
           Submit
         </YahtzeeButton>
