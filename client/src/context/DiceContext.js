@@ -11,28 +11,34 @@ const buildNewDiceStates = () => {
   }
   return newDiceBuilder;
 };
+const setupRollingAnimations = async (ref) => {};
 
 const DiceProvider = ({ children }) => {
   const [diceStates, setDiceStates] = useState(buildNewDiceStates());
   const diceRef = useRef();
 
-  const startRollDiceAnimation = () => {
-    const dieElements = [
-      ...diceRef.current.querySelectorAll(".die:not(.held)"),
-    ];
-    dieElements.forEach((die) => {
-      // console.log(die);
-    });
-  };
-
-  const rollDice = () => {
-    startRollDiceAnimation();
+  const generateNewDiceState = () => {
     const newDiceStates = diceStates.map((dieState) => {
       if (!dieState.isFree) return dieState;
       const newValue = randomNumberBetween(1, 6);
       return { ...dieState, value: newValue };
     });
     setDiceStates(newDiceStates);
+  };
+
+  const rollDice = (rollCount) => {
+    if (rollCount === 1) return generateNewDiceState();
+    const svgs = [...diceRef.current.getElementsByTagName("svg")];
+    console.log("svgs", svgs);
+    svgs.forEach((svg) => {
+      if (svg.classList.contains("held")) return;
+      svg.addEventListener("animationend", () => {
+        svg.style.animation = "";
+        generateNewDiceState();
+        svg.removeEventListener("animationend", () => {});
+      });
+      svg.style.animation = "die-roll 700ms";
+    });
   };
 
   const resetDice = () => setDiceStates(buildNewDiceStates());
