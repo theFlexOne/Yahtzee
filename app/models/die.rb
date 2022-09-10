@@ -1,3 +1,3 @@
 class Die < ApplicationRecord
-  has_one :roll
+  belongs_to :roll
 end
