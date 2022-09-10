@@ -35,9 +35,11 @@ const Login = () => {
   };
 
   const formik = useFormik({
-    initialValues: { username: "", password: "" },
+    initialValues: {},
     onSubmit,
   });
+
+  console.log("formik", formik);
 
   return (
     <div className="login">

@@ -31,17 +31,44 @@ const validateGameData = (data) => {
   return true;
 };
 
-const initialGameRecordRef = { turns: [] };
+const initialGameRecordRef = { turns: [], uuid: uuidv4() };
 
-const useGameRecord = () => {
-  const gameRecord = useRef(null);
+const generateInitialTurnState = (count) => {
+  return {
+    rolls: [],
+    count,
+  };
+};
+const useGameRecord = (playerNames) => {
+  const gameRecord = useRef({ ...initialGameRecordRef, playerNames });
+  const turnStateRef = useRef(generateInitialTurnState(1));
 
-  const newGameRecord = () => {
-    gameRecord.current = { ...initialGameRecordRef, uniqueId: uuidv4() };
-    return;
+  const resetTurn = () =>
+    (turnStateRef.current = generateInitialTurnState(
+      gameRecord.current.turns.length + 1
+    ));
+
+  const recordTurn = () => {
+    gameRecord.current.turns.push(turnStateRef.current);
+    resetTurn();
   };
 
-  return { newGameRecord };
+  const recordRoll = (rollState) => {
+    turnStateRef.current.rolls.push(rollState);
+    // if (turnStateRef.current.rolls.length === 3) {
+    recordTurn();
+    // }
+  };
+
+  console.log("turnStateRef.current", turnStateRef.current);
+  console.log("gameRecord.current", gameRecord.current);
+
+  return { recordRoll };
 };
 
 export default useGameRecord;
+
+/*
+  1) roll button clicked
+    - record roll state to it's corresponding turn
+*/

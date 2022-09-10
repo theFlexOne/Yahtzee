@@ -24,7 +24,7 @@ const GamePlay = ({ activePlayers }) => {
 
   const navigate = useNavigate();
 
-  // const { newGameRecord } = useGameRecord();
+  const { recordRoll } = useGameRecord(activePlayers);
 
   const currentPlayer = playersState[currentPlayerIndex];
 
@@ -48,11 +48,22 @@ const GamePlay = ({ activePlayers }) => {
     navigate("/");
   };
 
+  const recordCurrentRollState = () => {
+    const rollState = { rollCount: rollCount.current, dice: dice.diceStates };
+    console.log("rollState", rollState);
+    // recordRollState({
+    //   ...rollState,
+    //   turnCount: turnCount.current,
+    //   playerName: currentPlayer.name,
+    // });
+  };
+
   const handleRollButtonClick = () => {
     if (!isRollable) return;
+    if (rollCount.current !== 0) recordRoll({ ...dice.diceStates });
     rollCount.current++;
     setTakenScoringOptionId(null);
-    rollDice();
+    rollDice(rollCount.current);
   };
 
   const handleTakeScoreButtonClick = () => {
@@ -99,8 +110,10 @@ const GamePlay = ({ activePlayers }) => {
   // }
 
   // useEffect(() => {
-  //   newGameRecord();
-  // }, [newGameRecord]);
+  //   if (turnCount.ref === 1) newGameRecord();
+  // }, []);
+
+  console.log("dice.diceStates", dice.diceStates);
 
   return isCompleteGame ? (
     <div className="complete-game">
