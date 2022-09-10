@@ -68,7 +68,7 @@ const GameSetup = ({
             <span className="material-symbols-outlined">close</span>{" "}
           </button>
         )}
-        <h4>{`Player ${playerNumber + 1}`}</h4>
+        <h4 className="player-number">{`Player ${playerNumber + 1}`}</h4>
         <svg
           className="divider"
           width="196"

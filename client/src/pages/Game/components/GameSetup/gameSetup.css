@@ -8,18 +8,21 @@
 .players-container {
   display: flex;
   gap: 1.5rem;
+  flex-wrap: wrap;
+  place-content: center;
 }
 
 .player-card {
   position: relative;
   display: flex;
   flex-direction: column;
-  flex-basis: 100%;
+  flex-basis: 40%;
   gap: 0.5rem;
   align-items: center;
-  border: 2px solid #111;
+  border: 3px solid var(--primary-color-dark);
   border-radius: 3px;
-  padding: 1rem;
+  padding: 1rem 0;
+  background-color: goldenrod;
 }
 
 .player-card .delete {
@@ -36,18 +39,22 @@
   color: rgba(0, 0, 0, 0.75);
 }
 
+.player-card .player-number {
+  font-size: 1.5rem;
+}
+
 .player-card .divider {
   height: 0.5rem;
-  fill: goldenrod;
+  fill: var(--primary-color-dark);
 }
 
 .player-card input {
   margin-top: 0.25rem;
-  width: 20ch;
-}
-
-.player-card p span {
-  color: goldenrod;
+  width: calc(80% - 2.5rem);
+  padding: 0.2em 0.4em 0.1em;
+  border: 2px solid var(--primary-color-dark);
+  border-radius: 5px;
+  font-size: 1.5rem;
 }
 
 .btn-group {
