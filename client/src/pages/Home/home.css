@@ -18,8 +18,17 @@
   width: 80%;
   stroke: black;
   stroke-width: 3px;
+  /* translate: 0 -1000px; */
+  animation: title-animation 700ms ease-out;
 }
-
+.home .selections {
+  filter: opacity(0);
+  animation-name: selection-animation;
+  animation-duration: 500ms;
+  animation-play-state: ease;
+  animation-delay: 1000ms;
+  animation-fill-mode: forwards;
+}
 .home .selections a {
   text-decoration: none;
   font-size: x-large;
@@ -32,46 +41,23 @@
   /* color: goldenrod; */
 }
 
-/* .home h1 {
-  margin-top: auto;
-  margin-bottom: auto;
-  font-size: largest;
+@keyframes title-animation {
+  0% {
+    translate: 0 -1000px;
+  }
+  /* 95% {
+    translate: 0 35px;
+  } */
+  100% {
+    translate: 0;
+  }
 }
 
-.home form {
-  margin-bottom: auto;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+@keyframes selection-animation {
+  from {
+    filter: opacity(0);
+  }
+  to {
+    filter: opacity(1);
+  }
 }
-
-.home form p {
-  font-size: 2rem;
-  color: goldenrod;
-}
-
-.play-btn {
-  background-color: goldenrod;
-  border: 2px solid #333;
-  border-radius: 15px;
-  color: #3f0e08;
-  padding: 0 1em;
-  font-size: 1.5rem;
-  height: 100%;
-}
-
-.play-btn:hover {
-  filter: brightness(80%);
-  cursor: pointer;
-}
-
-.home a {
-  color: goldenrod;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 0.85em;
-}
-
-.home a:hover {
-  filter: brightness(80%);
-} */
