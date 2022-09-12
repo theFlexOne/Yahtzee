@@ -69,7 +69,7 @@ const GameSetup = ({
           </button>
         )}
         <h4 className="player-number">{`Player ${playerNumber + 1}`}</h4>
-        <svg
+        {/* <svg
           className="divider"
           width="196"
           height="30"
@@ -86,7 +86,7 @@ const GameSetup = ({
             height="19.8822"
             transform="rotate(45 97.9706 0.911682)"
           />
-        </svg>
+        </svg> */}
         {!isLoggingIn ? (
           <>
             <input

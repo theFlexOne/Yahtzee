@@ -44,7 +44,7 @@
 
 @keyframes title-animation {
   0% {
-    translate: 0 -1000px;
+    translate: -2000px 0px;
   }
   /* 95% {
     translate: 0 35px;

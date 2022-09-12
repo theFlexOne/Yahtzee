@@ -93,29 +93,42 @@ const Header = () => {
             </defs>
           </svg>
         </Link>
-        <span>
-          {user ? (
-            <>
-              <DefaultProfileBadge username={user.username} />
-              <Link className="logout" to="/" onClick={handleLogoutClick}>
-                Logout
-              </Link>
-              {/* <p className="welcome-user">Welcome, {user.username}</p> */}
-            </>
-          ) : (
-            <>
-              <Link
-                className={pathname === "/" ? "home-page" : ""}
-                to="/signup"
-              >
-                Signup
-              </Link>
-              <Link className={pathname === "/" ? "home-page" : ""} to="/login">
-                Login
-              </Link>
-            </>
-          )}
-        </span>
+        <nav>
+          <ul>
+            {user ? (
+              <>
+                <li>
+                  <DefaultProfileBadge username={user.username} />
+                </li>
+                <li>
+                  <Link className="logout" to="/" onClick={handleLogoutClick}>
+                    Logout
+                  </Link>
+                </li>
+                {/* <p className="welcome-user">Welcome, {user.username}</p> */}
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link
+                    className={pathname === "/" ? "home-page" : ""}
+                    to="/signup"
+                  >
+                    Signup
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className={pathname === "/" ? "home-page" : ""}
+                    to="/login"
+                  >
+                    Login
+                  </Link>
+                </li>
+              </>
+            )}
+          </ul>
+        </nav>
       </header>
     </>
   );
