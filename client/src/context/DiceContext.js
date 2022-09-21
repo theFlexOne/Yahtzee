@@ -27,7 +27,6 @@ const DiceProvider = ({ children }) => {
   const rollDice = (rollCount) => {
     if (rollCount === 1) return generateNewDiceState();
     const svgs = [...diceRef.current.getElementsByTagName("svg")];
-    console.log("svgs", svgs);
     svgs.forEach((svg) => {
       if (svg.classList.contains("held")) return;
       svg.addEventListener("animationend", () => {
@@ -41,9 +40,9 @@ const DiceProvider = ({ children }) => {
 
   const resetDice = () => setDiceStates(buildNewDiceStates());
 
-  const toggleDieFreedom = (id) => () => {
+  const toggleDieFreedom = (position) => () => {
     const newDiceStates = diceStates.map((dieState) => {
-      if (dieState.id !== id) return dieState;
+      if (dieState.position !== position) return dieState;
       return { ...dieState, isFree: !dieState.isFree };
     });
     setDiceStates(newDiceStates);

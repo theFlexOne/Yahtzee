@@ -1,13 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import "./App.css";
-// import CommentBubble from "./components/CommentBubble/CommentBubble";
 import CommentModal from "./components/CommentModal/CommentModal";
 import Header from "./components/Header/Header";
 import LeaveGameConfirmation from "./components/LeaveGameConfirmation/LeaveGameConfirmation";
-// import Modal from "./components/Modal/Modal";
-// import Game from "./pages/Game/Game";
-// import { DiceProvider } from "./context/DiceContext";
 import Routes from "./Routes";
 
 function App() {
@@ -30,6 +26,7 @@ function App() {
       <CommentModal
         isOpen={isOpenCommentModal}
         closeModal={() => setIsOpenCommentModal(false)}
+        toggleModal={() => setIsOpenCommentModal(!isOpenCommentModal)}
       />
       {/* <LeaveGameConfirmation
         isLeavingGame={isLeavingGame}

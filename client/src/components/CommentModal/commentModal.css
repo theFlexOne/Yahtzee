@@ -1,0 +1,15 @@
+.modal-button {
+  position: absolute;
+  right: 2rem;
+  bottom: 2rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background-color: hsl(43, 74%, 49%);
+  color: var(--primary-color-dark);
+  border: none;
+  cursor: pointer;
+}
+
+.modal-button:hover {
+  filter: brightness(65%);
+}

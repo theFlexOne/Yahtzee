@@ -15,7 +15,6 @@ const createUpperAndLowerSectionScoringOptions = () => {
     },
     [[], []]
   );
-  console.log(options);
   return options;
 };
 
@@ -28,32 +27,6 @@ const Scoresheet = ({
   onScoringOptionClick,
   takenScoringOptionId,
 }) => {
-  // const addUpUpperSection = () => {
-  //   const total = player.scoresheet.reduce((acc, cur) => {
-  //     if (cur.section === "upper") acc += cur.value || 0;
-  //     return acc;
-  //   }, 0);
-  //   return total;
-  // };
-
-  // const calculateBonusBox = () => (addUpUpperSection() >= 63 ? 35 : 0);
-
-  // const addUpUpperSectionWithBonus = () => {
-  //   const total = player.scoresheet.reduce((acc, cur) => {
-  //     if (cur.section === "upper") acc += cur.value || 0;
-  //     return acc;
-  //   }, 0);
-  //   return total >= 63 ? total + 35 : total;
-  // };
-
-  // const addUpLowerSection = () => {
-  //   const total = player.scoresheet.reduce((acc, cur) => {
-  //     if (cur.section === "lower") acc += cur.value || 0;
-  //     return acc;
-  //   }, 0);
-  //   return total;
-  // };
-
   return (
     <div className="scoresheet-container">
       {rollCount.current === 3 && !takenScoringOptionId && (

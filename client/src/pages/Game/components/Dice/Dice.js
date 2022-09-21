@@ -8,14 +8,17 @@ const Dice = () => {
 
   return (
     <div className="game-dice" ref={diceRef}>
-      {diceStates.map((die) => (
-        <Die
-          className="game-die"
-          key={die.id}
-          dieState={die}
-          toggleDieFreedom={toggleDieFreedom(die.id)}
-        />
-      ))}
+      {diceStates.map((die) => {
+        console.log(die);
+        return (
+          <Die
+            className="game-die"
+            key={die.position}
+            dieState={die}
+            toggleDieFreedom={toggleDieFreedom(die.position)}
+          />
+        );
+      })}
     </div>
   );
 };

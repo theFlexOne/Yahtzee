@@ -24,7 +24,11 @@ const Die = ({ dieState, toggleDieFreedom, className, ...other }) => {
   };
 
   return (
-    <div id={dieState.id} className={`die-wrapper ${className}`} {...other}>
+    <div
+      id={dieState.position}
+      className={`die-wrapper ${className}`}
+      {...other}
+    >
       <svg
         id={`die${dieState.id}`}
         className={`die${!dieState.isFree ? " held" : ""}`}

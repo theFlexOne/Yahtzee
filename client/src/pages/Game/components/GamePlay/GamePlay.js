@@ -36,7 +36,6 @@ const GamePlay = ({ activePlayers }) => {
     const scoringOption = currentPlayer.scoresheet.find(
       (opt) => opt.id === takenScoringOptionId
     );
-    console.log("scoringOption", scoringOption);
     const scoringOptionForRecord = {
       value: scoringOption.value,
       id: scoringOption.id,
@@ -62,7 +61,6 @@ const GamePlay = ({ activePlayers }) => {
   };
 
   const handleTakeScoreButtonClick = () => {
-    console.log("currentPlayer", currentPlayer);
     actions.lockPlayerScoringOption(takenScoringOptionId, currentPlayerIndex);
     endCurrentPlayersTurn();
   };
@@ -102,8 +100,6 @@ const GamePlay = ({ activePlayers }) => {
     endGame();
     navigate("/");
   };
-
-  console.log("currentPlayer", currentPlayer);
 
   return isCompleteGame ? (
     <div className="complete-game">
