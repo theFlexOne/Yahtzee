@@ -13,17 +13,9 @@ const Header = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
-  const confirmLeave = () => {
-    setIsLeavingGame(false);
-    navigate("/");
-  };
-
-  const cancelLeave = () => setIsLeavingGame(false);
-
   const handleLogoClick = (e) => {
     e.preventDefault();
     if (pathname === "/game") {
-      setIsLeavingGame(true);
       return;
     }
     navigate("/");
@@ -39,10 +31,6 @@ const Header = () => {
 
   return (
     <>
-      {isLeavingGame && (
-        <LeaveGameConfirmation confirm={confirmLeave} cancel={cancelLeave} />
-      )}
-
       <header>
         <Link to="/" onClick={handleLogoClick}>
           <svg

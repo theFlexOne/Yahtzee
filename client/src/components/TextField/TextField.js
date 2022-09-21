@@ -1,7 +1,25 @@
 import { v4 as uuidv4 } from "uuid";
 import "./textField.css";
 
-const TextField = ({ label, value, handleChange, type, id, ...other }) => {
+const ErrorMessage = ({ children, ...props }) => {
+  return (
+    <div className="error-message-wrapper">
+      <p className="error-message" {...props}>
+        {children}
+      </p>
+    </div>
+  );
+};
+
+const TextField = ({
+  label,
+  value,
+  handleChange,
+  errorMessage,
+  type,
+  id,
+  ...other
+}) => {
   id ||= uuidv4();
 
   if (type === "textarea")
@@ -19,12 +37,14 @@ const TextField = ({ label, value, handleChange, type, id, ...other }) => {
       <label>
         {label && <h5>{label}</h5>}
         <input
+          className="text-field"
           type={type || "text"}
           value={value}
           onChange={handleChange}
           {...other}
         />
       </label>
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </div>
   );
 };

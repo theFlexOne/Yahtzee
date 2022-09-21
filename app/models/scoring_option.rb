@@ -1,3 +1,3 @@
 class ScoringOption < ApplicationRecord
-  has_many :turns
+  belongs_to :turn
 end

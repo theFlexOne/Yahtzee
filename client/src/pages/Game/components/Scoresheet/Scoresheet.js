@@ -6,8 +6,8 @@ import ScoresheetSectionHeader from "../ScoresheetSectionHeader/ScoresheetSectio
 import ScoresheetScoringOption from "../ScoresheetScoringOption/ScoresheetScoringOption";
 // import ScoresheetTop from "../ScoresheetTop/ScoresheetTop";
 
-const createUpperAndLowerSectionScoringOptionsObjects = () => {
-  return DEFAULT_SCORING_OPTIONS.reduce(
+const createUpperAndLowerSectionScoringOptions = () => {
+  const options = DEFAULT_SCORING_OPTIONS.reduce(
     (acc, cur) => {
       if (cur.section === "upper") acc[0].push(cur);
       else acc[1].push(cur);
@@ -15,10 +15,12 @@ const createUpperAndLowerSectionScoringOptionsObjects = () => {
     },
     [[], []]
   );
+  console.log(options);
+  return options;
 };
 
 const [upperSectionScoringOptions, lowerSectionScoringOptions] =
-  createUpperAndLowerSectionScoringOptionsObjects();
+  createUpperAndLowerSectionScoringOptions();
 
 const Scoresheet = ({
   player,

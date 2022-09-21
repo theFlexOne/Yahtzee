@@ -1,6 +1,6 @@
-import { useEffect, useMemo } from "react";
 import DIE_CONFIG from "../../../../system/constants/dieSvgConfig.json";
 import "./die.css";
+import { v4 as uuid } from "uuid";
 
 const dieConfig = {
   pipPatterns: DIE_CONFIG.DIE_SVG_PIP_PATTERNS,
@@ -9,7 +9,7 @@ const dieConfig = {
 
 const drawPip = (pipId) => (
   <path
-    key={pipId}
+    key={uuid()}
     className="pip"
     id={`pip${pipId}`}
     d={dieConfig.pipPaths[pipId]}

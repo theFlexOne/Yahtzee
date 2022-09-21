@@ -3,7 +3,7 @@ import { randomNumberBetween } from "../helpers/mathHelpers";
 
 const DiceContext = createContext();
 
-const buildNewDie = (id) => ({ id, value: 0, isFree: true });
+const buildNewDie = (id) => ({ position: id, value: 0, isFree: true });
 const buildNewDiceStates = () => {
   const newDiceBuilder = [];
   for (let i = 1; i < 5 + 1; i++) {
@@ -11,8 +11,6 @@ const buildNewDiceStates = () => {
   }
   return newDiceBuilder;
 };
-const setupRollingAnimations = async (ref) => {};
-
 const DiceProvider = ({ children }) => {
   const [diceStates, setDiceStates] = useState(buildNewDiceStates());
   const diceRef = useRef();

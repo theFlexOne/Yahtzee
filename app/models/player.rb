@@ -1,4 +1,4 @@
 class Player < ApplicationRecord
-  belongs_to :game_record
-  belongs_to :turn
+  has_many :game_players
+  has_many :game_records, through: :game_players
 end

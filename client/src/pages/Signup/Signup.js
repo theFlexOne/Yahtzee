@@ -6,22 +6,41 @@ import Form from "../../components/Form/Form";
 import "./signup.css";
 import { useState } from "react";
 import TextField from "../../components/TextField/TextField";
+import {
+  PIN_VALIDATION_REGEX,
+  USERNAME_MAX_LENGTH,
+} from "../../constants/constants";
 
 const initialValues = {
   username: "",
-  password: "",
-  passwordConfirmation: "",
+  PIN: "",
+  PINConfirmation: "",
 };
 
 const validate = (values) => {
   const errors = {};
   if (values.username.length < 5)
     errors.username = "Username must be at least 5 characters";
-  if (values.password.length !== 4)
-    errors.password = "Password is a 4 digit pin, 0-9.";
-  if (values.password !== values.passwordConfirmation)
-    errors.passwordConfirmation = "Passwords must match";
+  if (values.PIN.length !== 4)
+    errors.PIN = "Can only contain numbers and must be 4 digits long.";
+  if (values.PIN !== values.PINConfirmation)
+    errors.PINConfirmation = "PINs must match";
   return errors;
+};
+
+const onSubmit = (setBackendErrors, setCurrentUser) => (values) => {
+  const options = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(values),
+  };
+  const createUser = async () => {
+    const res = await fetch("/users", options);
+    const data = await res.json();
+    if (data.error) return setBackendErrors(data.error);
+    setCurrentUser(data);
+  };
+  createUser();
 };
 
 const Signup = () => {
@@ -31,22 +50,16 @@ const Signup = () => {
     actions: { setCurrentUser },
   } = useUser();
 
-  const onSubmit = (values) => {
-    const options = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
-    };
-    const createUser = async () => {
-      const res = await fetch("/users", options);
-      const data = await res.json();
-      if (data.error) return setBackendErrors(data.error);
-      setCurrentUser(data);
-    };
-    createUser();
-  };
+  const formik = useFormik({
+    initialValues,
+    onSubmit: onSubmit(setBackendErrors, setCurrentUser),
+    validate,
+  });
 
-  const formik = useFormik({ initialValues, onSubmit, validate });
+  const handlePINChange = (e) => {
+    const { value } = e.target;
+    PIN_VALIDATION_REGEX.test(value) && formik.handleChange(e);
+  };
 
   const navigate = useNavigate();
 
@@ -59,85 +72,32 @@ const Signup = () => {
           name="username"
           label="Username:"
           placeholder="username"
+          errorMessage={formik.errors.username}
+          maxLength={USERNAME_MAX_LENGTH}
           value={formik.values.username}
           onChange={formik.handleChange}
         />
         <TextField
-          name="password"
-          label="Password:"
-          placeholder="password"
+          name="PIN"
+          label="Create a 4 digit PIN:"
+          placeholder="PIN"
+          errorMessage={formik.errors.PIN}
           type="password"
-          value={formik.values.password}
-          onChange={formik.handleChange}
+          value={formik.values.PIN}
+          onChange={handlePINChange}
           onBlur={formik.handleBlur}
         />
         <TextField
-          name="passwordConfirmation"
-          label="Confirm password (PIN):"
-          placeholder="confirm password (PIN)"
+          name="PINConfirmation"
+          label="Confirm PIN:"
+          placeholder="PIN"
+          errorMessage={formik.errors.PINConfirmation}
           type="password"
-          value={formik.values.passwordConfirmation}
-          onChange={formik.handleChange}
+          value={formik.values.PINConfirmation}
+          onChange={handlePINChange}
           onBlur={formik.handleBlur}
         />
         <YahtzeeButton data-styling="secondary">Submit</YahtzeeButton>
-        {/* <div className="input-container">
-          <div className="input-wrapper">
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              placeholder="create a unique username"
-              value={formik.values.username}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-          </div>
-          {formik.errors.username && formik.touched.username && (
-            <div className="input-error">{formik.errors.username}</div>
-          )}
-          {backendErrors.username && (
-            <div className="input-error">username {backendErrors.username}</div>
-          )}
-        </div>
-        <div className="input-container">
-          <div className="input-wrapper">
-            <label htmlFor="username">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="4 digit pin"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-          </div>
-          {formik.errors.password && formik.touched.password && (
-            <div className="input-error">{formik.errors.password}</div>
-          )}
-        </div>
-        <div className="input-container">
-          <div className="input-wrapper">
-            <label htmlFor="username">Re-enter Password</label>
-            <input
-              type="password"
-              id="passwordConfirmation"
-              name="passwordConfirmation"
-              placeholder="confirm password"
-              value={formik.values.passwordConfirmation}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-          </div>
-          {formik.errors.passwordConfirmation &&
-            formik.touched.passwordConfirmation && (
-              <div className="input-error">
-                {formik.errors.passwordConfirmation}
-              </div>
-            )}
-        </div> */}
       </Form>
     </div>
   );

@@ -6,3 +6,11 @@
 .input-container label {
   content: "";
 }
+
+.error-message-wrapper {
+}
+
+.error-message {
+  font-size: 0.35em;
+  color: red;
+}

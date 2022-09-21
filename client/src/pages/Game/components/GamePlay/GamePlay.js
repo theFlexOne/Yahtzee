@@ -24,7 +24,7 @@ const GamePlay = ({ activePlayers }) => {
 
   const navigate = useNavigate();
 
-  const { recordRoll } = useGameRecord(activePlayers);
+  const { recordRoll, endGame, endTurn } = useGameRecord();
 
   const currentPlayer = playersState[currentPlayerIndex];
 
@@ -33,29 +33,24 @@ const GamePlay = ({ activePlayers }) => {
   );
 
   const endCurrentPlayersTurn = () => {
-    rollCount.current = 0;
-    turnCount.current++;
+    const scoringOption = currentPlayer.scoresheet.find(
+      (opt) => opt.id === takenScoringOptionId
+    );
+    console.log("scoringOption", scoringOption);
+    const scoringOptionForRecord = {
+      value: scoringOption.value,
+      id: scoringOption.id,
+    };
     const nextPlayerIndex =
       currentPlayerIndex < activePlayers.length - 1
         ? currentPlayerIndex + 1
         : 0;
+    rollCount.current = 0;
+    turnCount.current++;
     setCurrentPlayerIndex(nextPlayerIndex);
     setTakenScoringOptionId(null);
+    endTurn(dice.diceStates, scoringOptionForRecord);
     resetDice();
-  };
-
-  const endGame = () => {
-    navigate("/");
-  };
-
-  const recordCurrentRollState = () => {
-    const rollState = { rollCount: rollCount.current, dice: dice.diceStates };
-    console.log("rollState", rollState);
-    // recordRollState({
-    //   ...rollState,
-    //   turnCount: turnCount.current,
-    //   playerName: currentPlayer.name,
-    // });
   };
 
   const handleRollButtonClick = () => {
@@ -67,6 +62,7 @@ const GamePlay = ({ activePlayers }) => {
   };
 
   const handleTakeScoreButtonClick = () => {
+    console.log("currentPlayer", currentPlayer);
     actions.lockPlayerScoringOption(takenScoringOptionId, currentPlayerIndex);
     endCurrentPlayersTurn();
   };
@@ -102,18 +98,12 @@ const GamePlay = ({ activePlayers }) => {
     );
     setTakenScoringOptionId(scoringOptionId);
   };
+  const handleEndGame = () => {
+    endGame();
+    navigate("/");
+  };
 
-  // const getWinningPlayerName = () => {
-  //   const winningPlayerIndex = playersState.reduce((acc, cur) => {
-  //     if
-  //   }, {highScore: 0, playerIndex: undefined})
-  // }
-
-  // useEffect(() => {
-  //   if (turnCount.ref === 1) newGameRecord();
-  // }, []);
-
-  console.log("dice.diceStates", dice.diceStates);
+  console.log("currentPlayer", currentPlayer);
 
   return isCompleteGame ? (
     <div className="complete-game">
@@ -140,7 +130,7 @@ const GamePlay = ({ activePlayers }) => {
       )}
       <div className="play-again-prompt">
         <p>Thanks for playing!</p>
-        <YahtzeeButton onClick={endGame}>Continue</YahtzeeButton>
+        <YahtzeeButton onClick={handleEndGame}>Continue</YahtzeeButton>
       </div>
     </div>
   ) : (
@@ -172,3 +162,32 @@ const GamePlay = ({ activePlayers }) => {
 };
 
 export default GamePlay;
+
+/*
+{
+    "uuid": "123abc",
+    // "players": [
+    //     "eric"
+    // ],
+    "turns": [
+        {
+            "rolls": [
+                {
+                    "dice": [
+                        {
+                            "position": 1,
+                            "value": 1,
+                            "isFree": true
+                        },
+                        {
+                            "position": 2,
+                            "value": 2,
+                            "isFree": false
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+*/
