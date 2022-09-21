@@ -26,7 +26,6 @@
 
 .form-container .input-container input {
   font-size: smallest;
-  /* margin-left: auto; */
   padding: 0.05rem 0.05rem;
   width: 100%;
 }
