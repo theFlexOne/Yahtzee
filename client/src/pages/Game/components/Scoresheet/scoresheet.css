@@ -140,46 +140,46 @@ svg.right-arrow {
   line-height: 80%;
 }
 
-.player-name-section {
+.scoresheet .player-name-section {
   padding-left: 2rem;
 }
 
-.player-name {
+.scoresheet .player-name {
   margin-left: 1rem;
   font-size: 2rem;
   font-family: "Righteous", cursive;
 }
 
-.scoring-option {
+.scoresheet .scoring-option {
   display: flex;
 }
-.scoring-option-label {
+.scoresheet .scoring-option-label {
   flex-basis: 45%;
 }
 
-.how-to-score {
+.scoresheet .how-to-score {
   flex-basis: 30%;
   text-align: center;
 }
 
-.how-to-score:not(.header-cell) {
+.scoresheet .how-to-score:not(.header-cell) {
   line-height: 12px;
 }
 
-.points-scored {
+.scoresheet .points-scored {
   /* flex-grow: 1; */
   flex-basis: 25%;
 }
 
-.points-scored.total {
+.scoresheet .points-scored.total {
   background-color: #ccc;
 }
 
-.scoring-option .points-scored:not(.locked):hover {
+.scoresheet .scoring-option .points-scored:not(.locked):hover {
   cursor: pointer;
 }
 
-.points-scored.selected {
+.scoresheet .points-scored.selected {
   background-color: goldenrod;
   /* color: #eee; */
 }
