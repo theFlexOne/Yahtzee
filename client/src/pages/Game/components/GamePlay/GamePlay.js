@@ -1,9 +1,8 @@
 import "./gamePlay.css";
 import Dice from "../Dice/Dice";
-// import GameControls from "../GameControls/GameControls";
 import Scoresheet from "../Scoresheet/Scoresheet";
 import YahtzeeButton from "../../../../components/YahtzeeButton/YahtzeeButton";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import usePlayers from "../../../../hooks/usePlayers";
 import { useDice } from "../../../../context/DiceContext";
 import { calculateScoringOptionPointsFromDiceValues } from "../../../../helpers/scoringHelpers";
@@ -141,16 +140,10 @@ const GamePlay = ({ activePlayers }) => {
               ? handleTakeScoreButtonClick
               : handleRollButtonClick
           }
+          data-styling={takenScoringOptionId ? "secondary" : ""}
         >
           {takenScoringOptionId || !isRollable ? "TAKE SCORE" : "ROLL!"}
         </YahtzeeButton>
-        {/* <YahtzeeButton
-          className="take-score-btn"
-          disabled={!takenScoringOptionId}
-          onClick={handleTakeScoreButtonClick}
-        >
-          TAKE SCORE
-        </YahtzeeButton> */}
       </div>
       <Scoresheet
         player={currentPlayer}
@@ -163,32 +156,3 @@ const GamePlay = ({ activePlayers }) => {
 };
 
 export default GamePlay;
-
-/*
-{
-    "uuid": "123abc",
-    // "players": [
-    //     "eric"
-    // ],
-    "turns": [
-        {
-            "rolls": [
-                {
-                    "dice": [
-                        {
-                            "position": 1,
-                            "value": 1,
-                            "isFree": true
-                        },
-                        {
-                            "position": 2,
-                            "value": 2,
-                            "isFree": false
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
-}
-*/
