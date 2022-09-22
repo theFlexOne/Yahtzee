@@ -1,5 +1,3 @@
-import "./scoresheetScoringOption.css";
-
 const ScoresheetScoringOption = ({
   option,
   takenScoringOptionId,

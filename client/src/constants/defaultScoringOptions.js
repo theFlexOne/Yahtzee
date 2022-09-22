@@ -6,7 +6,7 @@ const addDiceValues = (diceValues, val) => {
   return points;
 };
 
-export const DEFAULT_SCORING_OPTIONS = [
+const DEFAULT_SCORING_OPTIONS = [
   {
     id: 1,
     label: "aces (1)",
@@ -167,3 +167,5 @@ export const DEFAULT_SCORING_OPTIONS = [
     section: "lower",
   },
 ];
+
+export default DEFAULT_SCORING_OPTIONS;

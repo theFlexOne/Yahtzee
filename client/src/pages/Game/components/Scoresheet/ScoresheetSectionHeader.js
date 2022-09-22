@@ -1,5 +1,3 @@
-import "./scoresheetSectionHeader.css";
-
 const ScoresheetSectionHeader = ({ label }) => {
   return (
     <tr className="scoresheet-section-header scoresheet-row header-row">

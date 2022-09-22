@@ -1,10 +1,13 @@
-import DIE_CONFIG from "../../../../system/constants/dieSvgConfig.json";
+import {
+  DIE_SVG_PIP_PATTERNS,
+  DIE_SVG_PIP_PATHS,
+} from "../../../../constants/dieSvgConfig";
 import "./die.css";
 import { v4 as uuid } from "uuid";
 
 const dieConfig = {
-  pipPatterns: DIE_CONFIG.DIE_SVG_PIP_PATTERNS,
-  pipPaths: DIE_CONFIG.DIE_SVG_PIP_PATHS,
+  pipPatterns: DIE_SVG_PIP_PATTERNS,
+  pipPaths: DIE_SVG_PIP_PATHS,
 };
 
 const drawPip = (pipId) => (

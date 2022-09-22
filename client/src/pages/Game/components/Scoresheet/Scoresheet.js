@@ -1,9 +1,9 @@
 import "./scoresheet.css";
-import { DEFAULT_SCORING_OPTIONS } from "../../../../system/constants/defaultScoringOptions";
+import DEFAULT_SCORING_OPTIONS from "../../../../constants/defaultScoringOptions";
 import { ReactComponent as RightArrow } from "../../../../assets/right-arrow.svg";
-import ScoresheetSection from "../ScoresheetSection/ScoresheetSection";
-import ScoresheetSectionHeader from "../ScoresheetSectionHeader/ScoresheetSectionHeader";
-import ScoresheetScoringOption from "../ScoresheetScoringOption/ScoresheetScoringOption";
+import ScoresheetSection from "./ScoresheetSection";
+import ScoresheetSectionHeader from "./ScoresheetSectionHeader";
+import ScoresheetScoringOption from "./ScoresheetScoringOption";
 // import ScoresheetTop from "../ScoresheetTop/ScoresheetTop";
 
 const createUpperAndLowerSectionScoringOptions = () => {

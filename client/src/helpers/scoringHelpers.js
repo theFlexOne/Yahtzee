@@ -1,5 +1,5 @@
 // class SinglesScoringOption {
-import { DEFAULT_SCORING_OPTIONS } from "../system/constants/defaultScoringOptions";
+import DEFAULT_SCORING_OPTIONS from "../constants/defaultScoringOptions";
 
 export const generatePossibleScores = (diceValues) => {
   const possibleScores = DEFAULT_SCORING_OPTIONS.map((opt) => {

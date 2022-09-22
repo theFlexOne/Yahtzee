@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { DEFAULT_SCORING_OPTIONS } from "../system/constants/defaultScoringOptions";
+import DEFAULT_SCORING_OPTIONS from "../constants/defaultScoringOptions";
 
 const reducer = (state, action) => {
   const stateCopy = [...state];

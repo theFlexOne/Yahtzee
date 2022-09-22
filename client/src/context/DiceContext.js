@@ -1,5 +1,5 @@
 import { useContext, createContext, useState, useRef, useEffect } from "react";
-import { randomNumberBetween } from "../helpers/mathHelpers";
+// import { randomNumberBetween } from "../helpers/mathHelpers";
 
 const DiceContext = createContext();
 
@@ -11,6 +11,9 @@ const buildNewDiceStates = () => {
   }
   return newDiceBuilder;
 };
+
+const randomNumberBetween = (min, max) => Math.floor(Math.random() * max) + min;
+
 const DiceProvider = ({ children }) => {
   const [diceStates, setDiceStates] = useState(buildNewDiceStates());
   const diceRef = useRef();

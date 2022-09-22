@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 
 const generateInitialGameRecordState = () => ({
   turns: [],
@@ -7,7 +7,7 @@ const generateInitialGameRecordState = () => ({
 });
 
 const generateInitialTurnState = () => {
-  return { rolls: [], option: undefined };
+  return { rolls: [], option: null };
 };
 
 const useGameRecord = () => {

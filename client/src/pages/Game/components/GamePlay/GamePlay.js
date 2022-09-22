@@ -6,10 +6,10 @@ import YahtzeeButton from "../../../../components/YahtzeeButton/YahtzeeButton";
 import { useEffect, useRef, useState } from "react";
 import usePlayers from "../../../../hooks/usePlayers";
 import { useDice } from "../../../../context/DiceContext";
-import { MAX_NUMBER_OF_ROLLS_PER_TURN } from "../../../../system/constants/gameConstants";
 import { calculateScoringOptionPointsFromDiceValues } from "../../../../helpers/scoringHelpers";
 import { useNavigate } from "react-router";
 import useGameRecord from "../../../../hooks/useGameRecord";
+import { MAX_NUMBER_OF_ROLLS_PER_TURN } from "../../../../constants/constants";
 
 const GamePlay = ({ activePlayers }) => {
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
