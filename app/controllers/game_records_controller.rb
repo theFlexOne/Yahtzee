@@ -4,7 +4,6 @@ class GameRecordsController < ApplicationController
   skip_before_action :authorized
 
   def create
-    byebug
     game_record = GameRecord.create game_record_params
     params[:turns].each do |t|
       turn = Turn.create game_record_id: game_record.id
@@ -16,7 +15,6 @@ class GameRecordsController < ApplicationController
         end
       end
     end
-    # byebug
   end
 
   private
