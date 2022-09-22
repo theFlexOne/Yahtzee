@@ -7,11 +7,16 @@ const ScoresheetScoringOption = ({
   const value = player?.scoresheet.find(
     (score) => score.id === option.id
   )?.value;
-  const pointsScoredClassNames = `points-scored ${
-    takenScoringOptionId === option.id ? "selected" : ""
-  } ${value && takenScoringOptionId !== option.id ? "locked" : ""}`;
+
+  const pointsScoredClassNames = `points-scored${
+    takenScoringOptionId === option.id ? " selected" : ""
+  }${value && takenScoringOptionId !== option.id ? " locked" : ""}`;
+
+  console.log("option", option);
+  console.log("takenScoringOptionId", takenScoringOptionId);
+
   return (
-    <tr key={option.id} className="scoring-option scoresheet-row">
+    <tr key={option.id} className={`scoring-option scoresheet-row`}>
       <th
         className="scoring-option-label header-cell scoresheet-cell"
         data-font-size="A"

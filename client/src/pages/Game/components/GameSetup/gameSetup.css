@@ -28,6 +28,8 @@
   background-color: goldenrod;
   padding: 1rem 0;
   height: 300px;
+  color: var(--primary-color-dark);
+  min-width: fit-content;
 }
 
 .player-card .delete {
@@ -47,6 +49,9 @@
 .player-card .player-number {
   font-size: 1.5rem;
   margin-top: 2rem;
+  padding-bottom: 0.25rem;
+  padding-inline: 0.5rem;
+  border-bottom: 3px solid var(--primary-color-dark);
 }
 
 .player-card .divider {
@@ -72,7 +77,7 @@
   font-size: 1.15rem;
 }
 
-.btn-group {
+.game-setup .btn-group {
   display: flex;
   gap: 0.5rem;
 }

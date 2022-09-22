@@ -3,32 +3,11 @@ import { useRef, useState } from "react";
 import "./gameSetup.css";
 import YahtzeeButton from "../../../../components/YahtzeeButton/YahtzeeButton";
 
-const UserCard = ({ name, playerNumber }) => {
-  return (
-    <div className="player-card">
-      <h4>{`Player ${playerNumber + 1}`}</h4>
-      <svg
-        className="divider"
-        width="196"
-        height="30"
-        viewBox="0 0 196 30"
-        fill="goldenrod"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path d="M-4.80825e-07 15L73.5 5.47372L73.5 24.5263L-4.80825e-07 15Z" />
-        <path d="M196 15L122.5 24.5263L122.5 5.47372L196 15Z" />
-        <rect
-          x="97.9706"
-          y="0.911682"
-          width="19.8822"
-          height="19.8822"
-          transform="rotate(45 97.9706 0.911682)"
-        />
-      </svg>
-      <h3 className="name">{name}</h3>
-    </div>
-  );
-};
+const DeleteCardButton = ({ className, ...otherProps }) => (
+  <button className={`delete ${className}`} {...otherProps}>
+    <span className="material-symbols-outlined">close</span>{" "}
+  </button>
+);
 
 const GameSetup = ({
   activePlayers,
@@ -42,9 +21,7 @@ const GameSetup = ({
     return (
       <div className="player-card" data-player-number={playerNumber}>
         {activePlayers.length > 1 && (
-          <button className="delete" onClick={handlePlayerDelete(playerNumber)}>
-            <span className="material-symbols-outlined">close</span>{" "}
-          </button>
+          <DeleteCardButton onClick={handlePlayerDelete(playerNumber)} />
         )}
         <h4 className="player-number">{`Player #${playerNumber + 1}`}</h4>
         <div className="player-name">

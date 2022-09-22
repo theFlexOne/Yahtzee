@@ -135,23 +135,28 @@ const GamePlay = ({ activePlayers }) => {
       <div className="game-controls">
         <YahtzeeButton
           className="roll-btn"
-          disabled={!isRollable || takenScoringOptionId}
-          onClick={handleRollButtonClick}
+          disabled={!isRollable && !takenScoringOptionId}
+          onClick={
+            takenScoringOptionId
+              ? handleTakeScoreButtonClick
+              : handleRollButtonClick
+          }
         >
-          ROLL!
+          {takenScoringOptionId || !isRollable ? "TAKE SCORE" : "ROLL!"}
         </YahtzeeButton>
-        <YahtzeeButton
+        {/* <YahtzeeButton
           className="take-score-btn"
           disabled={!takenScoringOptionId}
           onClick={handleTakeScoreButtonClick}
         >
           TAKE SCORE
-        </YahtzeeButton>
+        </YahtzeeButton> */}
       </div>
       <Scoresheet
         player={currentPlayer}
         onScoringOptionClick={handleScoringOptionClick}
         rollCount={rollCount}
+        takenScoringOptionId={takenScoringOptionId}
       />
     </div>
   );

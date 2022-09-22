@@ -39,7 +39,6 @@ const Scoresheet = ({
         Name:
         <span className="player-name">{player.name}</span>
       </div>
-      {/* <ScoresheetTop player={player} /> */}
       <table className="scoresheet" data-layout="horizontal">
         <ScoresheetSection>
           <ScoresheetSectionHeader label="upper" />

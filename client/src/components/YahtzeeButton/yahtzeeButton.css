@@ -8,6 +8,7 @@
   font-family: "Righteous", cursive;
   padding: 0.25em 0.5em;
   cursor: pointer;
+  box-shadow: 1px 1px 10px;
 }
 
 .yahtzee-button[data-styling="secondary"] {
@@ -23,4 +24,10 @@
 .yahtzee-button:disabled {
   filter: brightness(50%);
   cursor: default;
+  box-shadow: none;
+}
+
+.yahtzee-button:active:hover:not(:disabled) {
+  filter: brightness(100%);
+  box-shadow: none;
 }
